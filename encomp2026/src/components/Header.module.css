@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=R  wght@300;400;500;600&display=swap');
+
+:root{
+  /*Cores principais */
+  --cor1: #00093f;
+  --cor2: #000000;
+  --cor3: #010b54;
+  --cor4: #ffffff;
+
+  /* Cores secundarias */
+  --cor5: #b328dd;
+  --cor6: #8162eb;
+  --cor7: #698ff6;
+  --cor8: #4c0c87;
+}
+/* O contentor principal (nav) */
+.navbar {
+    background-color: var(--cor2); 
+    display: flex;
+    justify-content: space-between;/* Logo na esquerda, botões na direita */
+    align-items: center;            /* Alinha verticalmente ao centro */
+    padding: 10px 20px;
+    flex-wrap: wrap; 
+                /* Adaptável: quebra linha se não couber */
+}
+/* Estilo para o novo container da logo + texto */
+.containerLogo {
+  display: flex;
+  align-items: center; /* Alinha o texto verticalmente com o meio da imagem */
+  gap: 10px;           /* Espaço pequeno entre a foto e o texto */
+}
+
+/* Ajuste no escrito para garantir que não haja margens sobrando */
+.escritoEncomp p {
+  color: var(--cor4);
+  margin: 0;           /* Remove margens padrão do parágrafo */
+  font-family: 'Orbitron', sans-serif; /* Vi que você importou essa fonte! */
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+/* Sua imagem já está ok, mas garanta que o height não a achate */
+.imagem_logo {
+  width: 50px;         /* Ajuste o tamanho conforme preferir */
+  height: auto;
+}
+/* O grupo de botões */
+.navButtons {
+    display: flex;
+    gap: 15px;     
+}      
+.navButtons button {
+    background-color: var(--cor3);
+    color: var(--cor4); /* Texto branco */
+    border: 1px solid var(--cor7);
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}           
+/* O efeito de passar o mouse */
+.navButtons button:hover {
+    border-color: var(--cor4);
+    box-shadow: 0 0 5px 5px var(--cor7);
+    cursor: pointer;
+    transform:scale(1.05);
+    transition: all 0.2s ease;
+}
+
+/* Ajuste para telas muito pequenas */
+@media (max-width: 480px) {
+  .navbar {
+    flex-direction: column;       /* Empilha logo e botões em telas pequenas */
+    gap: 10px;
+  }
+}
+

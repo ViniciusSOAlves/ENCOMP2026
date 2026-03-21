@@ -1,0 +1,23 @@
+:root{
+  /*Cores principais */
+  --cor1: #00093f;
+  --cor2: #000000;
+  --cor3: #010b54;
+  --cor4: #ffffff;
+
+  /* Cores secundarias */
+  --cor5: #b328dd;
+  --cor6: #8162eb;
+  --cor7: #698ff6;
+  --cor8: #4c0c87;
+}
+
+
+html{
+  background-color: #202020;
+}
+
+
+
+
+
