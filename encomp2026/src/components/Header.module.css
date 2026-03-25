@@ -42,11 +42,14 @@
 /* Sua imagem já está ok, mas garanta que o height não a achate */
 .imagem_logo {
   width: 50px;         /* Ajuste o tamanho conforme preferir */
-  height: auto;
+  height: 3%; /*Vai ter que mudar depois se coloca align itens*/
 }
 /* O grupo de botões */
 .navButtons {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
     gap: 15px;     
 }      
 .navButtons button {
@@ -57,7 +60,8 @@
     border-radius: 4px;
     cursor: pointer;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-}           
+}   
+       
 /* O efeito de passar o mouse */
 .navButtons button:hover {
     border-color: var(--cor4);

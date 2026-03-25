@@ -3,7 +3,7 @@ import classes from "./Header.module.css"
 
 const Header = () => {
   return (
-
+    
     <nav className={classes.navbar}>
       <div className={classes.containerLogo}>
         <img className={classes.imagem_logo} src="/Logo.png" alt="Logo"/>

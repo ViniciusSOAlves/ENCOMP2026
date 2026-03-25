@@ -5,7 +5,10 @@ function App() {
 
   return (
     <>
-    <Header/>
+    <header>
+      <Header/>
+    </header>
+    
     </>
   )
 }
