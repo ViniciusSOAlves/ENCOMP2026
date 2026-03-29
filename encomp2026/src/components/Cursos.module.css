@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=R  wght@300;400;500;600&display=swap');
+
+:root{
+  /*Cores principais */
+  --cor1: #00093f;
+  --cor2: #000000;
+  --cor3: #010b54;
+  --cor4: #ffffff;
+
+  /* Cores secundarias */
+  --cor5: #b328dd;
+  --cor6: #8162eb;
+  --cor7: #698ff6;
+  --cor8: #4c0c87;
+}
+
+label{
+    color: var(--cor4);
+    font-family: 'Orbitron', sans-serif;
+}
+.formularioPai{
+    width: auto;
+    display: flex;
+    justify-content: space-between;            
+    padding: 10px 20px;
+    flex-wrap: wrap; 
+    flex-direction: column;
+    border: 3px solid var(--cor7);
+}
+.form{
+     margin-top: 10px;
+}
+
+input[type="file"] {
+    color: var(--cor4); 
+    font-family: 'Orbitron', sans-serif; 
+}

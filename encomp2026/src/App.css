@@ -8,3 +8,9 @@ header{
   width: 97%;
   margin: 0 auto;
 }
+
+main{
+  width: 50%;
+  margin: 0 auto;
+  padding-left: 0;
+}

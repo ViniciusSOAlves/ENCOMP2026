@@ -1,4 +1,5 @@
 import './App.css'
+import Cursos from './components/Cursos'
 import Header from './components/Header'
 
 function App() {
@@ -8,7 +9,11 @@ function App() {
     <header>
       <Header/>
     </header>
-    
+    <main>
+      <Cursos />
+    </main>
+      
+
     </>
   )
 }
