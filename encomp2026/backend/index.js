@@ -58,7 +58,7 @@ app.post("/usuario", upload.single("fotoUp"), async (req, res) => {
     });
 
     res.json(novo);
-    
+
 
   } catch (err) {
     console.error("ERRO NO BACKEND:", err);
@@ -75,6 +75,41 @@ app.get("/lista", async (req, res) => {
     res.status(500).json({ erro: err.message });
   }
 });
+app.delete("/delete", async (req, res) => {
+  try {
+    const { id } = req.body;
+    const result = await prisma.cursos.delete({
+      where: { id: Number(id) }
+    });
+
+    res.json(result);
+  } catch (err) {
+    console.error("ERRO:", err);
+    res.status(500).json({ erro: err.message });
+  }
+});
+/* 
+app.update("/utualiza", async (req, res) => {
+  try {
+    const {id, nome, foto, descri, locate, dataAc } = req.body;
+    const result = await prisma.cursos.update({
+      where: { id: Number(id)},
+      data: {
+        nome: nome,
+        foto: foto,
+        descricao: descri,
+        dataAc: new Date(dataAc),
+        locate: locate
+      }
+    });
+    res.json(result);
+  } catch (err) {
+    console.error("ERRO:", err);
+    res.status(500).json({ erro: err.message });
+  }
+});
+
+*/
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Backend vivo na porta ${PORT}`));

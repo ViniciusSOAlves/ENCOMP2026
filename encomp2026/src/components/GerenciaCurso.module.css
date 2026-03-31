@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=R  wght@300;400;500;600&display=swap');
+
+:root{
+  /*Cores principais */
+  --cor1: #00093f;
+  --cor2: #000000;
+  --cor3: #010b54;
+  --cor4: #ffffff;
+
+  /* Cores secundarias */
+  --cor5: #b328dd;
+  --cor6: #8162eb;
+  --cor7: #698ff6;
+  --cor8: #4c0c87;
+}
+
+.item{
+    color: var(--cor4);
+    font-family: 'Orbitron', sans-serif;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid var(--cor6);
+    border-radius: 7px;
+    margin: 10px;
+    width: 600px;
+}
