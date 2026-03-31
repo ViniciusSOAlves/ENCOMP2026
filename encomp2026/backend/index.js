@@ -3,6 +3,8 @@ const cors = require('cors');
 const mysql = require('mysql2');
 const multer = require('multer');
 const path = require('path');
+const { PrismaClient } = require('@prisma/client');
+const prisma = new PrismaClient();
 
 const app = express();
 
@@ -33,29 +35,43 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
-app.post("/usuario", upload.single("fotoUp"), (req, res) => {
+app.post("/usuario", upload.single("fotoUp"), async (req, res) => {
   try {
-    const { nome, foto, descri, locate, data } = req.body;
+    const { nome, foto, descri, locate, dataAc } = req.body;
 
-    // 🔥 valida se o arquivo veio
+    //valida se o arquivo veio
     if (!req.file) {
       return res.status(400).json({ erro: "Arquivo não enviado" });
     }
 
-    console.log("===== DADOS RECEBIDOS =====");
-    console.log("Nome:", nome);
-    console.log("Foto:", foto);
-    console.log("Descrição:", descri);
-    console.log("Localização:", locate);
-    console.log("Data:", data);
-
     console.log("===== ARQUIVO =====");
     console.log(req.file);
 
-    res.json({ mensagem: "Recebido com sucesso (com imagem)!" });
+    const novo = await prisma.cursos.create({
+      data: {
+        nome,
+        foto,
+        descricao: descri,
+        dataAc: new Date(dataAc),
+        locate
+      }
+    });
+
+    res.json(novo);
+    
 
   } catch (err) {
     console.error("ERRO NO BACKEND:", err);
+    res.status(500).json({ erro: err.message });
+  }
+});
+
+app.get("/lista", async (req, res) => {
+  try {
+    const result = await prisma.cursos.findMany();
+    res.json(result);
+  } catch (err) {
+    console.error("ERRO:", err);
     res.status(500).json({ erro: err.message });
   }
 });

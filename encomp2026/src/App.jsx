@@ -1,5 +1,6 @@
 import './App.css'
 import Cursos from './components/Cursos'
+import GerenciaCurso from './components/GerenciaCurso'
 import Header from './components/Header'
 
 function App() {
@@ -12,7 +13,7 @@ function App() {
     <main>
       <Cursos />
     </main>
-      
+     
 
     </>
   )

@@ -1,13 +1,14 @@
 import classes from "./Cursos.module.css"
 
 import React, { useState } from 'react'
+import GerenciaCurso from "./GerenciaCurso";
 
 const Cursos = () => {
 
     const [nome, setNome] = useState("");
     const [foto, setFoto] = useState("");
     const [fotoUp, setUP] = useState(null);
-    const [data, setData] = useState("");
+    const [dataAc, setData] = useState("");
     const [descri, setDescri] = useState("");
     const [locate, setLocate] = useState("");
 
@@ -20,12 +21,13 @@ const Cursos = () => {
     }
 
     const formData = new FormData();
+
     formData.append("nome", nome);
     formData.append("foto", foto);
     formData.append("fotoUp", fotoUp);
     formData.append("descri", descri);
     formData.append("locate", locate);
-    formData.append("data", data);
+    formData.append("dataAc", dataAc);
 
     const resposta = await fetch("http://localhost:5000/usuario", {
       method: "POST",
@@ -108,6 +110,8 @@ const Cursos = () => {
                 <button type="submit">Enviar</button>
             </div>
         </form>
+
+         <GerenciaCurso />
     </>
   );
 }
