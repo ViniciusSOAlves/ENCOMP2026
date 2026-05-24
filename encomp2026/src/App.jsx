@@ -39,74 +39,226 @@ function App() {
         </div>
       </header>
 
-      <main className="mb-5">
-        <div className="row bg-black text-white p-5 rounded align-items-center mb-5">
 
-          {/* TÍTULO DA SEÇÃO - Agora com < /> estilo tag de código */}
-          <div className="col-12 text-center mb-5">
-            <h1 className="titulo-secao-tag">
-              <span className="cor">&lt;</span>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <main className="mt-5 mb-5">
+        <div className="row bg-black d-flex justify-content-between p-5">
+
+          <div className="col-12 text-center">
+            <h1 className="fw-bold text-light mb-5">
+              <span className="cor">{'{'}</span>
               História do ENCOMP
-              <span className="cor">/&gt;</span>
+              <span className="cor">{'}'}</span>
             </h1>
           </div>
 
-          {/* COLUNA DA IMAGEM (ESQUERDA) */}
-          <div className="col-12 col-md-5 text-center mb-4 mb-md-0">
-            <img className="img-fluid p-3" src='logoBranca.png' alt="Logo ENCOMP" style={{ maxHeight: '380px' }} />
+          <div className="col-1">
+          </div>
+          <div className="col-3">
+            <img className=" float-start" src="logoBranca.png" style={{ height: 'auto', width: '180px' }} />
           </div>
 
-          {/* COLUNA DO TEXTO COM ÍCONES (DIREITA) */}
-          <div className="col-12 col-md-7">
-            <div className="bloco-historia">
-
-              {/* Parágrafo 1 */}
-              <div className="item-historia mb-4">
-                <p>
-                  O Encontro de Computação (ENCOMP) surgiu em 2015 como uma iniciativa dos estudantes e professores do curso Bacharelado em Ciência da Computação do IFSULDEMINAS - Campus Passos, com o objetivo de aproximar a comunidade acadêmica do mercado de trabalho e das tendências tecnológicas.
-                </p>
-              </div>
-
-              {/* Parágrafo 2 */}
-              <div className="item-historia mb-4">
-
-                <p>
-                  Ao longo dos anos, o evento cresceu e se consolidou como uma das principais conferências de tecnologia da região, atraindo participantes de diversas instituições e profissionais renomados do setor.
-                </p>
-              </div>
-
-              {/* Parágrafo 3 */}
-              <div className="item-historia">
-
-                <p>
-                  Para 2026, o ENCOMP chega à sua 11ª edição com uma programação especial, trazendo temas inovadores como Inteligência Artificial, Cloud Computing, Edição de Vídeo e muito mais.
-                </p>
-              </div>
-
-            </div>
+          <div className="col-7 text-start text-light ms-3 fs-18 w-50">
+            <p  style={{ textAlign: 'justify'}}>
+              O Encontro de Computação (ENCOMP) surgiu em 2015 como uma iniciativa dos estudantes e professores do curso Bacharelado em Ciência da Computação do IFSULDEMINAS - Campus Passos, com o objetivo de aproximar a comunidade acadêmica do mercado de trabalho e das tendências tecnológicas.
+            </p>
+            <p style={{ textAlign: 'justify'}}>
+              Ao longo dos anos, o evento cresceu e se consolidou como uma das principais conferências de tecnologia da região, atraindo participantes de diversas instituições e profissionais renomados do setor.
+            </p>
+            <p style={{ textAlign: 'justify'}}>
+              Para 2026, o ENCOMP chega à sua 11ª edição com uma programação especial, trazendo temas inovadores como Inteligência Artificial, Cloud Computing, Edição de Vídeo e muito mais.
+            </p>
+          </div>
+          <div className="col-1">
           </div>
 
         </div>
+
       </main>
-      <footer class="row">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <footer className="text-center text-lg-start bg-body-tertiary text-muted">
+        {/* <!-- Section: Social media --> */}
+        <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
+          {/* <!-- Left --> */}
+          <div className="me-5 d-none d-lg-block">
+            <span>Get connected with us on social networks:</span>
           </div>
-        </div>
-        <div class="col-sm-6">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
-            </div>
+          {/* <!-- Left --> */}
+
+          {/* <!-- Right --> */}
+          <div>
+            <a href="" className="me-4 text-reset">
+              <i className="fab fa-facebook-f"></i>
+            </a>
+            <a href="" className="me-4 text-reset">
+              <i className="fab fa-twitter"></i>
+            </a>
+            <a href="" className="me-4 text-reset">
+              <i className="fab fa-google"></i>
+            </a>
+            <a href="" className="me-4 text-reset">
+              <i className="fab fa-instagram"></i>
+            </a>
+            <a href="" className="me-4 text-reset">
+              <i className="fab fa-linkedin"></i>
+            </a>
+            <a href="" className="me-4 text-reset">
+              <i className="fab fa-github"></i>
+            </a>
           </div>
+          {/* <!-- Right --> */}
+        </section>
+        {/* <!-- Section: Social media --> */}
+
+        {/* <!-- Section: Links  --> */}
+        <section className="">
+          <div className="container text-center text-md-start mt-5">
+            {/* <!-- Grid row --> */}
+            <div className="row mt-3">
+              {/* <!-- Grid column --> */}
+              <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+                {/* <!-- Content --> */}
+                <h6 className="text-uppercase fw-bold mb-4">
+                  <i className="fas fa-gem me-3"></i>Company name
+                </h6>
+                <p>
+                  Here you can use rows and columns to organize your footer content. Lorem ipsum
+                  dolor sit amet, consectetur adipisicing elit.
+                </p>
+              </div>
+              {/* <!-- Grid column --> */}
+
+              {/* <!-- Grid column --> */}
+              <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
+                {/* <!-- Links --> */}
+                <h6 className="text-uppercase fw-bold mb-4">
+                  Products
+                </h6>
+                <p>
+                  <a href="#!" className="text-reset">Angular</a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset">React</a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset">Vue</a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset">Laravel</a>
+                </p>
+              </div>
+              {/* <!-- Grid column --> */}
+
+              {/* <!-- Grid column --> */}
+              <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                {/* <!-- Links --> */}
+                <h6 className="text-uppercase fw-bold mb-4">
+                  Useful links
+                </h6>
+                <p>
+                  <a href="#!" className="text-reset">Pricing</a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset">Settings</a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset">Orders</a>
+                </p>
+                <p>
+                  <a href="#!" className="text-reset">Help</a>
+                </p>
+              </div>
+              {/* <!-- Grid column --> */}
+
+              {/* <!-- Grid column --> */}
+              <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                {/* <!-- Links --> */}
+                <h6 className="text-uppercase fw-bold mb-4">Contact</h6>
+                <p><i className="fas fa-home me-3"></i> New York, NY 10012, US</p>
+                <p>
+                  <i className="fas fa-envelope me-3"></i>
+                  info@example.com
+                </p>
+                <p><i className="fas fa-phone me-3"></i> + 01 234 567 88</p>
+                <p><i className="fas fa-print me-3"></i> + 01 234 567 89</p>
+              </div>
+              {/* <!/-- Grid column --> */}
+            </div>
+            {/* <!-- Grid row --> */}
+          </div>
+        </section>
+
+
+
+        <div className="text-center p-4 text-light" style={{ backgroundColor: "black" }}>
+          © 2021 Copyright:
+          <a className="text-reset fw-bold" href="https://mdbootstrap.com/">MDBootstrap.com</a>
         </div>
+        {/* <!-- Copyright --> */}
       </footer>
     </>
   )

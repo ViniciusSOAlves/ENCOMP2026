@@ -271,7 +271,7 @@ header img#fundo {
 }
 
 .cor {
-  color: var(--cor5) !important; /* Troquei para cor5 para dar o tom roxo/rosa neon do seu drop-shadow */
+  color: var(--cor5) !important; 
   text-shadow: 0 0 10px var(--cor4);
 }
 
