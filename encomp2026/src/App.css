@@ -17,40 +17,39 @@
   --cor8: #4c0c87;
 }
 
+/* Forçando o header a se comportar isolado do grid do Bootstrap */
 header {
-  width: 100%;
-  height: 100vh;
-  position: relative;
+  width: 100% !important;
+  height: 100vh !important;
+  position: relative !important;
   overflow: hidden; 
+  display: block;
 }
 
 header img#fundo {
   width: 100vw;
-  height: 100dvh;
+  height: 100vh; /* Mudado de 100dvh para 100vh fixo para evitar conflitos */
   object-fit: cover;
   position: absolute;
   top: 0;
   left: 0;
   z-index: -1;
-  filter: blur(20px);
+  filter: blur(10px);
 }
 
-/*intro*/
 #intro {
-  display: flex;
+  display: flex !important;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   
   position: absolute;
-
   top: 50%; 
   left: 50%;
- 
   transform: translate(-50%, -50%);
   
   z-index: 2;
-  color:var(--cor4);
+  color: var(--cor4);
   text-align: center;
   width: 100%;
 }
@@ -63,7 +62,6 @@ header img#fundo {
   animation: pulsar 1.35s infinite ease-in-out;
 }
 
-
 #titulo-intro {
   font-family: 'Orbitron', sans-serif;
   font-size: 3rem;
@@ -71,6 +69,7 @@ header img#fundo {
   text-transform: uppercase;
   margin: 0;
 }
+
 .info-detalhes {
   display: flex;
   gap: 30px;          
@@ -90,19 +89,24 @@ header img#fundo {
   font-size: 1.1rem;
   color: var(--cor4);
   font-weight: 400;
+  margin-bottom: 0; /* Remove a margem padrão que o Bootstrap joga nas tags p */
 }
 
-.cor{
+.cor {
   color: var(--cor8);
   filter: drop-shadow(0 0 0 var(--cor4)) drop-shadow(0 0 5px var(--cor4));
 }
+
+/* Forçando nossa navbar sobre a folha de estilos do Bootstrap */
 .navbar {
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
+  background-color: rgba(0, 0, 0, 0.8) !important;
+  display: flex !important;
   justify-content: space-between;
   align-items: center;
   padding: 10px 40px;
-  position: relative;
+  position: absolute; /* Mudado para absolute para não empurrar o resto da intro */
+  top: 0;
+  left: 0;
   z-index: 10;
   width: 100%;
 }
@@ -123,6 +127,7 @@ header img#fundo {
   font-family: 'Orbitron', sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
+  margin-bottom: 0; /* Anti-Bootstrap padding override */
 }
 
 .navButtons {
@@ -147,46 +152,193 @@ header img#fundo {
   transform: scale(1.05);
 }
 
-main {
-  width: 80%;
-  margin: 50px auto;
+.item-historia {
+  display: flex;
+  align-items: flex-start; /* Alinha o ícone com a primeira linha do parágrafo */
+  gap: 15px;               /* Espaço entre o ícone e o texto */
+}
+
+
+.item-historia p {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #cccccc;          /* Tom de cinza claro idêntico ao do print para não cansar as vistas */
+  margin-bottom: 0;
+  text-align: justify;
+}
+
+/* Código do seu @keyframes limpo e otimizado abaixo */
+@keyframes pulsar {
+  0%, 100% { transform: scale(1.0); }
+  50% { transform: scale(1.1); }
+}@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --cor1: #00093f;
+  --cor2: #000000;
+  --cor3: #010b54;
+  --cor4: #ffffff;
+  --cor5: #b328dd;
+  --cor6: #8162eb;
+  --cor7: #698ff6;
+  --cor8: #4c0c87;
+}
+
+/* Forçando o Header a ocupar a tela e ser a base do absoluto */
+header.main-header {
+  width: 100% !important;
+  height: 100vh !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: block !important;
+  background-color: var(--cor2) !important; /* Caso a imagem falhe, o fundo fica escuro */
+}
+
+header img#fundo {
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: cover !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 1 !important; /* Passado para positivo para ficar em cima do fundo branco do Bootstrap */
+  filter: blur(10px);
+}
+
+/* O container intro precisa estar acima da imagem de fundo */
+#intro {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  
+  position: absolute !important;
+  top: 55% !important; 
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  
+  z-index: 5 !important; /* Valor maior para garantir que fique por cima da imagem */
+  color: var(--cor4) !important;
+  text-align: center !important;
+  width: 100% !important;
+}
+
+.logo-central {
+  width: 180px !important; 
+  height: auto !important;
+  margin-bottom: 20px !important;
+  filter: drop-shadow(0 0 10px var(--cor8)) drop-shadow(0 0 15px var(--cor8)) !important;
+  animation: pulsar 1.35s infinite ease-in-out !important;
+}
+
+#titulo-intro {
+  font-family: 'Orbitron', sans-serif !important;
+  font-size: 3rem !important;
+  letter-spacing: 5px !important;
+  text-transform: uppercase !important;
+  color: var(--cor4) !important;
+  margin: 0 !important;
+  display: block !important;
+}
+
+.info-detalhes {
+  display: flex !important;
+  gap: 30px !important;          
+  margin-top: 20px !important;  
+  flex-wrap: wrap !important;    
+  justify-content: center !important;
+}
+
+.item-info {
+  display: flex !important;
+  align-items: center !important;
+  gap: 10px !important;          
+}
+
+.item-info p {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 1.1rem !important;
+  color: var(--cor4) !important;
+  font-weight: 400 !important;
+  margin-bottom: 0 !important;
+}
+
+.cor {
+  color: var(--cor5) !important; /* Troquei para cor5 para dar o tom roxo/rosa neon do seu drop-shadow */
+  text-shadow: 0 0 10px var(--cor4);
+}
+
+/* Navbar fixa por cima de tudo */
+.navbar {
+  background-color: rgba(0, 0, 0, 0.85) !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 10px 40px !important;
+  position: absolute !important; 
+  top: 0 !important;
+  left: 0 !important;
+  z-index: 10 !important;
+  width: 100% !important;
+}
+
+.containerLogo {
+  display: flex !important;
+  align-items: center !important;
+  gap: 15px !important;
+}
+
+.imagem_logo {
+  width: 50px !important;
+  height: auto !important;
+}
+
+.escritoEncomp p {
+  color: var(--cor4) !important;
+  font-family: 'Orbitron', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 1.5rem !important;
+  margin-bottom: 0 !important;
+}
+
+.navButtons {
+  display: flex !important;
+  gap: 20px !important;
+}
+
+.navButtons button {
+  background-color: var(--cor3) !important;
+  color: var(--cor4) !important;
+  border: 1px solid var(--cor7) !important;
+  padding: 10px 20px !important;
+  border-radius: 4px !important;
+  cursor: pointer !important;
+  font-family: 'Roboto', sans-serif !important;
+  transition: all 0.3s ease !important;
+}
+
+.navButtons button:hover {
+  border-color: var(--cor4) !important;
+  box-shadow: 0 0 15px var(--cor7) !important;
+  transform: scale(1.05) !important;
 }
 
 @media (max-width: 768px) {
   .navbar {
-    flex-direction: column;
-    gap: 15px;
-    text-align: center;
+    flex-direction: column !important;
+    gap: 15px !important;
+    text-align: center !important;
   }
 }
 
-
 @keyframes pulsar {
-  0%{
-    transform: scale(1.0);
-  }10%{
-    transform: scale(1.02);
-  }
-  20%{
-    transform: scale(1.04);
-  }
-  30%{
-    transform: scale(1.06);
-  }
-  40%{
-    transform: scale(1.08);
-  }50%{
-    transform: scale(1.1);
-  }
-  60%{
-    transform: scale(1.08);
-  }70%{
-    transform: scale(1.06);
-  }80%{
-    transform: scale(1.04);
-  }90%{
-    transform: scale(1.02);
-  }100%{
-    transform: scale(1.0);
-  }
+  0%, 100% { transform: scale(1.0); }
+  50% { transform: scale(1.1); }
 }
