@@ -18,3 +18,26 @@ model cursos {
   descri       String? @db.Text
   tipo         String? @db.VarChar(20)
 }
+
+model palestra {
+  id          Int       @id @default(autoincrement())
+  nome        String?   @db.VarChar(255)
+  palestrante String?   @db.VarChar(255)
+  foto        String?   @db.VarChar(255)
+  status      String?   @db.VarChar(255)
+  tema        String?   @db.VarChar(255)
+  descri      String?   @db.Text
+  data        DateTime? @db.Date
+  horario     DateTime? @db.Time(0)
+  local       String?   @db.VarChar(255)
+  modalidade  String?   @db.VarChar(255)
+}
+
+model cronograma {
+  id        Int       @id @default(autoincrement())
+  data      DateTime? @db.Date
+  horario   DateTime? @db.Time(0)
+  atividade String?   @db.VarChar(255)
+  formato   String?   @db.VarChar(255)
+  LocalLink String?   @db.VarChar(255)
+}

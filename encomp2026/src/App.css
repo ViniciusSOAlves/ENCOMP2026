@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
-
 * {
   margin: 0;
   padding: 0;
@@ -172,7 +171,7 @@ header img#fundo {
 @keyframes pulsar {
   0%, 100% { transform: scale(1.0); }
   50% { transform: scale(1.1); }
-}@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+}
 
 * {
   margin: 0;

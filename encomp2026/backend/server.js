@@ -123,5 +123,35 @@ app.get("/BuscaCurso", async (req, res) => {
   }
 });
 
+app.get("/BuscaPalestra", async (req, res) => {
+  try {
+    const search = await prisma.palestra.findMany({
+    });
+
+    return res.status(200).json(search); 
+
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro interno" });
+  }
+});
+
+app.post("/Cronograma", async (req, res) => {
+  const { data } = req.body;
+  try {
+
+    const search = await prisma.cronograma.findMany({
+      where: {data: data ? new Date(`${data}T00:00:00.000Z`) : undefined}
+    });
+
+    return res.status(200).json(search); 
+
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro interno" });
+  }
+});
+
+
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Backend vivo na porta ${PORT}`));
