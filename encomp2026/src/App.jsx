@@ -1,8 +1,26 @@
+import { useEffect, useState } from 'react'
 import './App.css'
 import Cursos from './components/Cursos'
 import GerenciaCurso from './components/GerenciaCurso'
 
 function App() {
+  const [curso, setCurso] = useState([])
+
+  const buscaCurso = async () => {
+    const busca = await fetch('http://localhost:5000/BuscaCurso', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await busca.json();
+    setCurso(data);
+  }
+
+
+  useEffect(() => {
+    buscaCurso();
+  }, []);
   return (
     <>
       <header className="main-header">
@@ -85,13 +103,13 @@ function App() {
           </div>
 
           <div className="col-7 text-start text-light ms-3 fs-18 w-50">
-            <p  style={{ textAlign: 'justify'}}>
+            <p style={{ textAlign: 'justify' }}>
               O Encontro de Computação (ENCOMP) surgiu em 2015 como uma iniciativa dos estudantes e professores do curso Bacharelado em Ciência da Computação do IFSULDEMINAS - Campus Passos, com o objetivo de aproximar a comunidade acadêmica do mercado de trabalho e das tendências tecnológicas.
             </p>
-            <p style={{ textAlign: 'justify'}}>
+            <p style={{ textAlign: 'justify' }}>
               Ao longo dos anos, o evento cresceu e se consolidou como uma das principais conferências de tecnologia da região, atraindo participantes de diversas instituições e profissionais renomados do setor.
             </p>
-            <p style={{ textAlign: 'justify'}}>
+            <p style={{ textAlign: 'justify' }}>
               Para 2026, o ENCOMP chega à sua 11ª edição com uma programação especial, trazendo temas inovadores como Inteligência Artificial, Cloud Computing, Edição de Vídeo e muito mais.
             </p>
           </div>
@@ -99,8 +117,37 @@ function App() {
           </div>
 
         </div>
+        <div className="row mt-5 mb-5 g-4">
+          {
+            Array.isArray(curso) && curso.length > 0 ? (
 
-      </main>
+              curso.map((i) => (
+
+                <div className='col-12 col-md-4 col-lg-3' key={i.id} >
+                  <div className="border p-3 h-100">
+
+                    <figure id={i.id} >
+                      <img src={"/" + i.foto} alt={i.foto} className='img-fluid w-100' style={{ height: '100px', objectFit: 'cover' }} />
+                      <figcaption>{i.nome}</figcaption>
+                      <p>Ministrantes: {i.ministrantes}</p>
+                      <p>Carga horária: {i.cargahoraria}</p>
+                      <p>Vagas: {i.vagas}</p>
+                      <p>Tipo: {i.tipo}</p>
+                      <p>{i.descri}</p>
+                    </figure>
+
+                  </div>
+                </div>
+
+              ))
+            ) : (
+              <p className='text-light'>Nenhuma curso encontrada.</p>
+            )
+          }
+        </div>
+
+
+      </main >
 
 
 

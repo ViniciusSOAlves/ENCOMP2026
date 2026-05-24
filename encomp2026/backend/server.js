@@ -110,6 +110,18 @@ app.update("/utualiza", async (req, res) => {
 });
 
 */
+app.get("/BuscaCurso", async (req, res) => {
+  try {
+    const search = await prisma.cursos.findMany({
+    });
+
+    return res.status(200).json(search); 
+
+  } catch (error) {
+      console.error(error);
+      return res.status(500).json({ error: "Erro interno" });
+  }
+});
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Backend vivo na porta ${PORT}`));
