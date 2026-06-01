@@ -148,7 +148,7 @@ function App() {
               <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 " style={{color:'var(--cor5)'}}>
                 {/* */}
                 <h6 className="text-uppercase fw-bold mb-4 text-light">Contact</h6>
-                <p><i className="fas fa-home me-3"></i> Passos, Minas Gerais, Brasil</p>
+                <p><i className="fas fa-home"></i> Passos, Minas Gerais, Brasil</p>
                 <p>
                   <i className="fas fa-envelope me-3"></i>
                   
