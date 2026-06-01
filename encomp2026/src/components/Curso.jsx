@@ -18,7 +18,14 @@ const Curso = () => {
     }, []);
     return (
         <div className="row mt-5 mb-5 g-4">
-            <h1>Cursos</h1>
+            <div className="col-12 text-center">
+                <h1 className="fw-bold text-light mb-5">
+                    <span className="cor">{'{'}</span>
+                    Minicursos
+                    <span className="cor">{'}'}</span>
+                </h1>
+            </div>
+
             {
                 Array.isArray(curso) && curso.length > 0 ? (
 
