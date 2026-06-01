@@ -24,172 +24,6 @@ header {
   overflow: hidden; 
   display: block;
 }
-
-header img#fundo {
-  width: 100vw;
-  height: 100vh; /* Mudado de 100dvh para 100vh fixo para evitar conflitos */
-  object-fit: cover;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  filter: blur(10px);
-}
-
-#intro {
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  
-  position: absolute;
-  top: 50%; 
-  left: 50%;
-  transform: translate(-50%, -50%);
-  
-  z-index: 2;
-  color: var(--cor4);
-  text-align: center;
-  width: 100%;
-}
-
-.logo-central {
-  width: 180px; 
-  height: auto;
-  margin-bottom: 20px;
-  filter: drop-shadow(0 0 10px var(--cor8)) drop-shadow(0 0 15px var(--cor8));
-  animation: pulsar 1.35s infinite ease-in-out;
-}
-
-#titulo-intro {
-  font-family: 'Orbitron', sans-serif;
-  font-size: 3rem;
-  letter-spacing: 5px;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.info-detalhes {
-  display: flex;
-  gap: 30px;          
-  margin-top: 20px;  
-  flex-wrap: wrap;    
-  justify-content: center;
-}
-
-.item-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;          
-}
-
-.item-info p {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.1rem;
-  color: var(--cor4);
-  font-weight: 400;
-  margin-bottom: 0; /* Remove a margem padrão que o Bootstrap joga nas tags p */
-}
-
-.cor {
-  color: var(--cor8);
-  filter: drop-shadow(0 0 0 var(--cor4)) drop-shadow(0 0 5px var(--cor4));
-}
-
-/* Forçando nossa navbar sobre a folha de estilos do Bootstrap */
-.navbar {
-  background-color: rgba(0, 0, 0, 0.8) !important;
-  display: flex !important;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 40px;
-  position: absolute; /* Mudado para absolute para não empurrar o resto da intro */
-  top: 0;
-  left: 0;
-  z-index: 10;
-  width: 100%;
-}
-
-.containerLogo {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.imagem_logo {
-  width: 50px;
-  height: auto;
-}
-
-.escritoEncomp p {
-  color: var(--cor4);
-  font-family: 'Orbitron', sans-serif;
-  font-weight: 700;
-  font-size: 1.5rem;
-  margin-bottom: 0; /* Anti-Bootstrap padding override */
-}
-
-.navButtons {
-  display: flex;
-  gap: 20px;
-}
-
-.navButtons button {
-  background-color: var(--cor3);
-  color: var(--cor4);
-  border: 1px solid var(--cor7);
-  padding: 10px 20px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-family: 'Roboto', sans-serif;
-  transition: all 0.3s ease;
-}
-
-.navButtons button:hover {
-  border-color: var(--cor4);
-  box-shadow: 0 0 15px var(--cor7);
-  transform: scale(1.05);
-}
-
-.item-historia {
-  display: flex;
-  align-items: flex-start; /* Alinha o ícone com a primeira linha do parágrafo */
-  gap: 15px;               /* Espaço entre o ícone e o texto */
-}
-
-
-.item-historia p {
-  font-family: 'Roboto', sans-serif !important;
-  font-size: 1.1rem;
-  line-height: 1.7;
-  color: #cccccc;          /* Tom de cinza claro idêntico ao do print para não cansar as vistas */
-  margin-bottom: 0;
-  text-align: justify;
-}
-
-/* Código do seu @keyframes limpo e otimizado abaixo */
-@keyframes pulsar {
-  0%, 100% { transform: scale(1.0); }
-  50% { transform: scale(1.1); }
-}
-
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --cor1: #00093f;
-  --cor2: #000000;
-  --cor3: #010b54;
-  --cor4: #ffffff;
-  --cor5: #b328dd;
-  --cor6: #8162eb;
-  --cor7: #698ff6;
-  --cor8: #4c0c87;
-}
-
 /* Forçando o Header a ocupar a tela e ser a base do absoluto */
 header.main-header {
   width: 100% !important;
@@ -270,9 +104,9 @@ header img#fundo {
 }
 
 .cor {
-  color: var(--cor5) !important; 
-  text-shadow: 0 0 10px var(--cor4);
+  color: var(--cor5);
 }
+
 
 /* Navbar fixa por cima de tudo */
 .navbar {
@@ -287,6 +121,7 @@ header img#fundo {
   z-index: 10 !important;
   width: 100% !important;
 }
+
 
 .containerLogo {
   display: flex !important;
@@ -327,6 +162,28 @@ header img#fundo {
   border-color: var(--cor4) !important;
   box-shadow: 0 0 15px var(--cor7) !important;
   transform: scale(1.05) !important;
+}
+
+.item-historia {
+  display: flex;
+  align-items: flex-start; /* Alinha o ícone com a primeira linha do parágrafo */
+  gap: 15px;               /* Espaço entre o ícone e o texto */
+}
+
+
+.item-historia p {
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #cccccc;          /* Tom de cinza claro idêntico ao do print para não cansar as vistas */
+  margin-bottom: 0;
+  text-align: justify;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 @media (max-width: 768px) {

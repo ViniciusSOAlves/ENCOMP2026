@@ -1,40 +1,12 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import Cursos from './components/Cursos'
 import GerenciaCurso from './components/GerenciaCurso'
-import Cronograma from './components/cronograma'
+import Cronograma from './components/Cronograma'
+import Palestras from './components/Palestras'
+import Curso from './components/Curso'
+
 function App() {
-  const [curso, setCurso] = useState([]);
-  const [palestra, setPalestra] = useState([]);
-
-  const buscaCurso = async () => {
-    const busca = await fetch('http://localhost:5000/BuscaCurso', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await busca.json();
-    setCurso(data);
-  }
-  const buscaPalestra = async () => {
-    const busca = await fetch('http://localhost:5000/BuscaPalestra', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-    const data = await busca.json();
-    setPalestra(data);
-  }
-
-
-
-  useEffect(() => {
-    buscaCurso();
-    buscaPalestra();
-
-  }, []);
+  
   return (
     <>
       <header className="main-header">
@@ -132,72 +104,12 @@ function App() {
 
         </div>
 
-        <div className="row mt-5 mb-5 g-4">
-          <h1>Palestras</h1>
-          {
-            Array.isArray(palestra) && palestra.length > 0 ? (
-
-              palestra.map((i) => (
-
-                <div className='col-12 col-md-4 col-lg-3' key={i.id} >
-                  <div className="border p-3 h-100">
-
-                    <figure id={i.id} >
-                      <img src={"/" + i.foto} alt={i.foto} className='img-fluid w-100' style={{ height: '500px', objectFit: 'cover' }} />
-                      <figcaption>{i.nome}</figcaption>
-                      <p>Palestrante: {i.palestrante}</p>
-                      <p>Status: {i.status}</p>
-                      <p>Tema: {i.tema}</p>
-                      <p>Data: {i.data ? new Date(i.data).toLocaleDateString('pt-BR') : "Não informada"}</p>
-                      <p>Hora: {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : "Não informada"}</p>
-                      <p>Local: {i.local}</p>
-                      <p>Modalidade: {i.modalidade}</p>
-                      <p>{i.descri}</p>
-                    </figure>
-
-                  </div>
-                </div>
-
-              ))
-            ) : (
-              <p className='text-light'>Nenhuma palestra encontrada.</p>
-            )
-          }
-        </div>
+        <Palestras />
 
 
-        <div className="row mt-5 mb-5 g-4">
-          <h1>Cursos</h1>
-          {
-            Array.isArray(curso) && curso.length > 0 ? (
+        <Curso />
 
-              curso.map((i) => (
-
-                <div className='col-12 col-md-4 col-lg-3' key={i.id} >
-                  <div className="border p-3 h-100">
-
-                    <figure id={i.id} >
-                      <img src={"/" + i.foto} alt={i.foto} className='img-fluid w-100' style={{ height: '100px', objectFit: 'cover' }} />
-                      <figcaption>{i.nome}</figcaption>
-                      <p>Ministrantes: {i.ministrantes}</p>
-                      <p>Carga horária: {i.cargahoraria}</p>
-                      <p>Vagas: {i.vagas}</p>
-                      <p>Tipo: {i.tipo}</p>
-                      <p>{i.descri}</p>
-                    </figure>
-
-                  </div>
-                </div>
-
-              ))
-            ) : (
-              <p className='text-light'>Nenhuma curso encontrada.</p>
-            )
-          }
-          
-        </div>
-
-          <Cronograma />
+        <Cronograma />
       </main >
 
 

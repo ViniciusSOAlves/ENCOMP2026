@@ -12,12 +12,10 @@
   --cor8: #4c0c87;
 }
 
-
-html{
-  background-color: var(--cor1);
+body {
+  background-color: #000; 
+  color: #fff; 
 }
-
-
 
 
 

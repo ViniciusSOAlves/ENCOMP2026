@@ -12,15 +12,6 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Configuração do MySQL
-const db = mysql.createConnection({
-  host: 'localhost',
-  port: 3306,
-  user: 'root',
-  password: '',
-  database: 'rojeto_react'
-});
-
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, path.join(__dirname, '..', 'public')); // <- CORRETO
