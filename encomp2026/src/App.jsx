@@ -77,9 +77,10 @@ function App() {
 
         </div>
 
+        
         <Palestras />
 
-
+        {/* A gente ainda vai fazer a parte de dividir em seções quando decidirmos quais as categorias, ou se vai ser por dia, ou noturno/diurno */}
         <Curso />
 
         <Cronograma />
