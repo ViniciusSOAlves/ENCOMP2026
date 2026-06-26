@@ -19,11 +19,11 @@ const Patrocinadores = () => {
         }, []);
 
   return (
-       <div className="row mt-5 mb-5 g-4">
+       <div className="row g-4 justify-content-center">
           <div className="col-12 text-center">
                 <h1 className="fw-bold text-light mb-5">
                     <span className="cor">{'{'}</span>
-                    Patriocinador
+                    Patrocinadores
                     <span className="cor">{'}'}</span>
                 </h1>
             </div>
@@ -33,12 +33,12 @@ const Patrocinadores = () => {
 
               patrio.map((i) => (
 
-                <div className='col-12 col-md-6 col-lg-4' key={i.id} >
-                  <div className="card bg-dark text-light h-100  p-3" style={{border: '3px solid var(--cor8)'}}>
+                <div className='col-auto' key={i.id} >
+                  <div className="card bg-dark text-light p-1" style={{border: '3px solid var(--cor8)'}}>
 
-                    <div className="card-body" id={i.id} >
-                      <img src={"/patrocinadores/" + i.foto} alt={i.foto} className='img-fluid w-100' style={{ height: '50px', objectFit: 'cover' }} />
-                      <h4 className='card-title mt-3'>{i.nome}</h4>
+                    <div className="card-body p-1 text-center" id={i.id} >
+                      <img src={"/patrocinadores/" + i.foto} alt={i.foto} className='img-fluid' style={{ width: '150px', height: '150px', objectFit: 'cover' }} />
+                      <h6 className='card-title mt-1 mb-0' style={{ fontSize: '0.75rem' }}>{i.nome}</h6>
                     </div>
                   </div>
                 </div>

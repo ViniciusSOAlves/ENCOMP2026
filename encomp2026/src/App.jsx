@@ -5,6 +5,7 @@ import Cronograma from './components/Cronograma'
 import Palestras from './components/Palestras'
 import Curso from './components/Curso'
 import Patrocinadores from './components/Patrocinadores'
+import Acordeon from './components/Acordeon'
 
 function App() {
 
@@ -87,6 +88,8 @@ function App() {
         <Cronograma />
 
         <Patrocinadores />
+
+        <Acordeon />
       </main >
 
       <footer className="text-center text-lg-start bg-body-tertiary bg-dark" >
