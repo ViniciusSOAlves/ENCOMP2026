@@ -41,3 +41,9 @@ model cronograma {
   formato   String?   @db.VarChar(255)
   LocalLink String?   @db.VarChar(255)
 }
+
+model patrocinador {
+  id   Int     @id @default(autoincrement())
+  nome String? @db.VarChar(255)
+  foto String? @db.VarChar(255)
+}

@@ -22,7 +22,7 @@ const Palestras = () => {
           <div className="col-12 text-center">
                 <h1 className="fw-bold text-light mb-5">
                     <span className="cor">{'{'}</span>
-                    Palestras
+                    Patriocinador
                     <span className="cor">{'}'}</span>
                 </h1>
             </div>
