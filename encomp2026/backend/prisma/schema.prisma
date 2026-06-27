@@ -17,6 +17,7 @@ model cursos {
   diaSemana    String? @db.VarChar(255)
   descri       String? @db.Text
   tipo         String? @db.VarChar(20)
+  nivel        String  @db.VarChar(50)
 }
 
 model palestra {

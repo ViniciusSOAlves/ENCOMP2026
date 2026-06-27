@@ -101,9 +101,11 @@ app.update("/utualiza", async (req, res) => {
 });
 
 */
-app.get("/BuscaCurso", async (req, res) => {
+app.post("/BuscaCurso", async (req, res) => {
+  const { nivel } = req.body;
   try {
     const search = await prisma.cursos.findMany({
+      where: {nivel: nivel }
     });
 
     return res.status(200).json(search); 

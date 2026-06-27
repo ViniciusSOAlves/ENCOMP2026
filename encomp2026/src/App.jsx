@@ -6,6 +6,7 @@ import Palestras from './components/Palestras'
 import Curso from './components/Curso'
 import Patrocinadores from './components/Patrocinadores'
 import Acordeon from './components/Acordeon'
+import Equipe from './components/Equipe'
 
 function App() {
 
@@ -86,6 +87,8 @@ function App() {
         <Curso />
 
         <Cronograma />
+
+        <Equipe />
 
         <Patrocinadores />
 

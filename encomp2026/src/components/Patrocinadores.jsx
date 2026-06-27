@@ -19,7 +19,7 @@ const Patrocinadores = () => {
         }, []);
 
   return (
-       <div className="row g-4 justify-content-center">
+       <div className="row g-4 justify-content-center mt-4">
           <div className="col-12 text-center">
                 <h1 className="fw-bold text-light mb-5">
                     <span className="cor">{'{'}</span>
