@@ -27,6 +27,8 @@ function App() {
             <button>Componente 1</button>
             <button>Componente 2</button>
             <button>Componente 3</button>
+            <button>Componente 4</button>
+            <button>Componente 5</button>
           </div>
         </nav>
 

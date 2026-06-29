@@ -116,9 +116,11 @@ app.post("/BuscaCurso", async (req, res) => {
   }
 });
 
-app.get("/BuscaPalestra", async (req, res) => {
+app.post("/BuscaPalestra", async (req, res) => {
+  const { data } = req.body;
   try {
     const search = await prisma.palestra.findMany({
+      where: {data: data ? new Date(`${data}T00:00:00.000Z`) : undefined}
     });
 
     return res.status(200).json(search); 

@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Cronograma = () => {
     const [crono, setCrono] = useState([]);
-    const [filtro, setFiltro] = useState({ data: "2026-06-15" });
+    const [filtro, setFiltro] = useState({ data: "2026-10-26" });
 
     const buscaCronograma = async () => {
         try {
@@ -60,24 +60,24 @@ const Cronograma = () => {
 
             <div className="d-flex flex-wrap justify-content-center gap-3 mb-5">
                 <div>
-                    <input type="radio" className="btn-check" id="dia1" value="2026-06-15" onChange={lidarComFiltro} checked={filtro.data === "2026-06-15"} name="dia" />
-                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-06-15")} htmlFor="dia1">Segunda-feira</label>
+                    <input type="radio" className="btn-check" id="diaC1" value="2026-10-26" onChange={lidarComFiltro} checked={filtro.data === "2026-10-26"} name="diaC" />
+                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-26")} htmlFor="diaC1">Segunda-feira</label>
                 </div>
                 <div>
-                    <input type="radio" className="btn-check" id="dia2" value="2026-06-16" onChange={lidarComFiltro} checked={filtro.data === "2026-06-16"} name="dia" />
-                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-06-16")} htmlFor="dia2">Terça-feira</label>
+                    <input type="radio" className="btn-check" id="diaC2" value="2026-10-27" onChange={lidarComFiltro} checked={filtro.data === "2026-10-27"} name="diaC" />
+                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-27")} htmlFor="diaC2">Terça-feira</label>
                 </div>
                 <div>
-                    <input type="radio" className="btn-check" id="dia3" value="2026-06-17" onChange={lidarComFiltro} checked={filtro.data === "2026-06-17"} name="dia" />
-                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-06-17")} htmlFor="dia3">Quarta-feira</label>
+                    <input type="radio" className="btn-check" id="diaC3" value="2026-10-28" onChange={lidarComFiltro} checked={filtro.data === "2026-10-28"} name="diaC" />
+                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-28")} htmlFor="diaC3">Quarta-feira</label>
                 </div>
                 <div>
-                    <input type="radio" className="btn-check" id="dia4" value="2026-06-18" onChange={lidarComFiltro} checked={filtro.data === "2026-06-18"} name="dia" />
-                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-06-18")} htmlFor="dia4">Quinta-feira</label>
+                    <input type="radio" className="btn-check" id="diaC4" value="2026-10-29" onChange={lidarComFiltro} checked={filtro.data === "2026-10-29"} name="diaC" />
+                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-29")} htmlFor="diaC4">Quinta-feira</label>
                 </div>
                 <div>
-                    <input type="radio" className="btn-check" id="dia5" value="2026-06-19" onChange={lidarComFiltro} checked={filtro.data === "2026-06-19"} name="dia" />
-                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-06-19")} htmlFor="dia5">Sexta-feira</label>
+                    <input type="radio" className="btn-check" id="diaC5" value="2026-10-30" onChange={lidarComFiltro} checked={filtro.data === "2026-10-30"} name="diaC" />
+                    <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-30")} htmlFor="diaC5">Sexta-feira</label>
                 </div>
             </div>
 

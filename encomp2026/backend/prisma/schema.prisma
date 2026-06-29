@@ -8,16 +8,17 @@ datasource db {
 }
 
 model cursos {
-  id           Int     @id @default(autoincrement())
-  nome         String? @db.VarChar(255)
-  foto         String? @db.VarChar(255)
-  ministrantes String? @db.VarChar(25)
-  cargahoraria String? @db.VarChar(255)
+  id           Int       @id @default(autoincrement())
+  nome         String?   @db.VarChar(255)
+  foto         String?   @db.VarChar(255)
+  ministrantes String?   @db.VarChar(25)
+  cargahoraria String?   @db.VarChar(255)
   vagas        Int?
-  diaSemana    String? @db.VarChar(255)
-  descri       String? @db.Text
-  tipo         String? @db.VarChar(20)
-  nivel        String  @db.VarChar(50)
+  diaSemana    String?   @db.VarChar(255)
+  descri       String?   @db.Text
+  tipo         String?   @db.VarChar(20)
+  nivel        String    @db.VarChar(50)
+  data         DateTime? @db.Date
 }
 
 model palestra {
