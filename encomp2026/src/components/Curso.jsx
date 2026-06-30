@@ -71,7 +71,7 @@ const Curso = () => {
                             <div className="card bg-dark text-light h-100  p-3" style={{ border: '3px solid var(--cor8)' }}>
 
                                 <div className="card-body" id={i.id} >
-                                    <img src={"/" + i.foto} alt={i.foto} className='img-fluid rounded-start' />
+                                    <img src={"/FotosEquipe/" + i.foto} alt={i.foto} className='img-fluid rounded-start' style={{ width: '100%', height: '400px', objectFit: 'cover' }}/>
                                     <h4 className='card-title'>{i.nome}</h4>
                                     <p className='card-text'>{i.descri}</p>
                                 </div>

@@ -11,7 +11,7 @@ const Equipe = () => {
                 </h1>
             </div>
             <div className="col-12 text-center">
-                <img src="/FotosEquipe/equipe.jpeg" class="img-fluid w-50" alt="fotoEquipe" />
+                <img src="/FotosEquipe/equipe.jpeg" class="img-fluid w-75" alt="fotoEquipe" />
             </div>
 
         </div>
