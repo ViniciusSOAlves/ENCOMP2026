@@ -7,6 +7,7 @@ import Curso from './components/Curso'
 import Patrocinadores from './components/Patrocinadores'
 import Acordeon from './components/Acordeon'
 import Equipe from './components/Equipe'
+import SobreIF from './components/SobreIF'
 
 function App() {
 
@@ -81,14 +82,14 @@ function App() {
           </div>
 
         </div>
+        <SobreIF />
 
-        
+        <Cronograma />
+
         <Palestras />
 
         {/* A gente ainda vai fazer a parte de dividir em seções quando decidirmos quais as categorias, ou se vai ser por dia, ou noturno/diurno */}
         <Curso />
-
-        <Cronograma />
 
         <Equipe />
 
@@ -106,11 +107,10 @@ function App() {
               <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 ">
                 {/* */}
                 <h6 className="text-uppercase fw-bold mb-4 text-light">
-                  <i className="fas fa-gem"></i>IFSULDEMINAS Campus Passos
+                  <i className="fas fa-gem"></i>ENCOMP 2026
                 </h6>
                 <p>
-                  Here you can use rows and columns to organize your footer content. Lorem ipsum
-                  dolor sit amet, consectetur adipisicing elit.
+                  O maior evento de computação do Sul de Minas Gerais. Palestras, minicursos, campeonato de League of Legends e muito mais!
                 </p>
               </div>
 
@@ -121,52 +121,35 @@ function App() {
                   Products
                 </h6>
                 <p>
-                  <a href="#!" className="text-reset">Angular</a>
+                  <i className="bi bi-instagram"></i>
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">React</a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">Vue</a>
-                </p>
-                <p>
-                  <a href="#!" className="text-reset">Laravel</a>
+                  <i className="bi bi-whatsapp"></i>
                 </p>
               </div>
               {/* */}
 
               {/* */}
-              <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4" style={{color:'var(--cor5)'}}>
+              <div className="col-md-3 col-lg-2 col-xl-3 mx-auto mb-4">
                 {/* */}
                 <h6 className="text-uppercase fw-bold mb-4 text-light" >
-                  Useful links
+                  Contato
                 </h6>
                 <p>
-                  <a href="#!" className="text-reset">Pricing</a>
+                  IFSULDEMINAS - Campus Passos
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">Settings</a>
+                  Rua da Penha, 290 - Penha II
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">Orders</a>
+                   Passos - MG, 37903-070
                 </p>
                 <p>
-                  <a href="#!" className="text-reset">Help</a>
+                  janaina.leite@ifsuldeminas.edu.br
                 </p>
-              </div>
-              {/* */}
-
-              {/* */}
-              <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 " style={{color:'var(--cor5)'}}>
-                {/* */}
-                <h6 className="text-uppercase fw-bold mb-4 text-light">Contact</h6>
-                <p><i className="fas fa-home"></i> Passos, Minas Gerais, Brasil</p>
                 <p>
-                  <i className="fas fa-envelope me-3"></i>
-                  
+                  (35) 3526-4856
                 </p>
-                <p><i className="fas fa-phone me-3"></i> </p>
-                <p><i className="fas fa-print me-3"></i> </p>
               </div>
               {/* */}
             </div>

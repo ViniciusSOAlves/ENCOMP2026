@@ -150,6 +150,9 @@ app.post("/Cronograma", async (req, res) => {
 app.get("/patrocinador", async (req, res) => {
   try {
     const search = await prisma.patrocinador.findMany({
+      orderBy: {
+        nome: 'asc'
+      }
     });
 
     return res.status(200).json(search); 

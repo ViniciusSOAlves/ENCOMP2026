@@ -67,20 +67,36 @@ const Curso = () => {
 
                     curso.map((i) => (
 
-                        <div className='col-12 col-md-4 col-lg-3 ' key={i.id} >
-                            <div className="card bg-dark text-light h-100  p-3" style={{ border: '3px solid var(--cor8)' }}>
+                        <div className='col-12 col-md-4 col-lg-3 mb-4' key={i.id}>
+                            <div className="card h-100 shadow-sm" style={{ border: '3px solid var(--cor8)', borderRadius: '15px', overflow: 'hidden', backgroundColor: '#1e1e1e' }}>
 
-                                <div className="card-body" id={i.id} >
-                                    <img src={"/FotosEquipe/" + i.foto} alt={i.foto} className='img-fluid rounded-start' style={{ width: '100%', height: '400px', objectFit: 'cover' }}/>
-                                    <h4 className='card-title'>{i.nome}</h4>
-                                    <p className='card-text'>{i.descri}</p>
+                                <div className="card-body p-3 text-light">
+
+                                    <img
+                                        src={"/FotosEquipe/" + i.foto}
+                                        alt={i.nome}
+                                        className='img-fluid rounded mb-3'
+                                        style={{ width: '100%', height: '400px', objectFit: 'cover', display: 'block' }}
+                                    />
+
+                                    <h4 className='card-title fw-bold text-center'>{i.nome}</h4>
+                                    <p className='card-text text-secondary text-center small'>{i.descri}</p>
+
+                                    <ul className='list-group list-group-flush mt-3 px-0'>
+                                        <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
+                                            <strong>Ministrantes:</strong> {i.ministrantes}
+                                        </li>
+                                        <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
+                                            <strong>Carga horária:</strong> {i.cargahoraria}
+                                        </li>
+                                        <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
+                                            <strong>Vagas:</strong> {i.vagas}
+                                        </li>
+                                        <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
+                                            <strong>Tipo:</strong> {i.tipo}
+                                        </li>
+                                    </ul>
                                 </div>
-                                <ul className='lsit-group list-group-flush'>
-                                    <li className='list-group-item'>Ministrantes: {i.ministrantes}</li>
-                                    <li className='list-group-item'>Carga horária: {i.cargahoraria}</li>
-                                    <li className='list-group-item'>Vagas: {i.vagas}</li>
-                                    <li className='list-group-item'>Tipo: {i.tipo}</li>
-                                </ul>
 
                             </div>
                         </div>
