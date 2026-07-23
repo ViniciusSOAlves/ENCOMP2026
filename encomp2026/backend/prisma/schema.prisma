@@ -8,17 +8,20 @@ datasource db {
 }
 
 model cursos {
-  id           Int       @id @default(autoincrement())
-  nome         String?   @db.VarChar(255)
-  foto         String?   @db.VarChar(255)
-  ministrantes String?   @db.VarChar(25)
-  cargahoraria String?   @db.VarChar(255)
+  id           Int          @id @default(autoincrement())
+  nome         String?      @db.VarChar(255)
+  foto         String?      @db.VarChar(255)
+  ministrantes String?      @db.VarChar(25)
+  cargahoraria String?      @db.VarChar(255)
   vagas        Int?
-  diaSemana    String?   @db.VarChar(255)
-  descri       String?   @db.Text
-  tipo         String?   @db.VarChar(20)
-  nivel        String    @db.VarChar(50)
-  data         DateTime? @db.Date
+  descri       String?      @db.Text
+  tipo         String?      @db.VarChar(20)
+  nivel        String       @db.VarChar(50)
+  quantDias    Int?
+  local        String?      @db.VarChar(50)
+
+  // Relação inversa: 1 curso pode ter várias datas no cronograma
+  datas_crono  data_crono[]
 }
 
 model palestra {
@@ -48,4 +51,16 @@ model patrocinador {
   id   Int     @id @default(autoincrement())
   nome String? @db.VarChar(255)
   foto String? @db.VarChar(255)
+}
+model data_crono {
+  id       Int       @id @default(autoincrement())
+  data     DateTime? @db.Date
+  HoraIni  DateTime? @db.Time(0)
+  HoraFim  DateTime? @db.Time(0)
+  id_curso Int?
+
+  // Relacionamento com a tabela cursos
+  curso    cursos?   @relation(fields: [id_curso], references: [id], onDelete: Cascade, onUpdate: Cascade)
+
+  @@index([id_curso], map: "id_curso")
 }

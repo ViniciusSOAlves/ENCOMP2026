@@ -105,14 +105,23 @@ app.post("/BuscaCurso", async (req, res) => {
   const { nivel } = req.body;
   try {
     const search = await prisma.cursos.findMany({
-      where: {nivel: nivel }
+      where: {
+        nivel: nivel
+      },
+      include: {
+        datas_crono: {
+          orderBy: {
+            data: 'asc', // Ordena as datas do curso em ordem cronológica
+          },
+        },
+      },
     });
 
-    return res.status(200).json(search); 
+    return res.status(200).json(search);
 
   } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Erro interno" });
+    console.error(error);
+    return res.status(500).json({ error: "Erro interno" });
   }
 });
 
@@ -120,30 +129,61 @@ app.post("/BuscaPalestra", async (req, res) => {
   const { data } = req.body;
   try {
     const search = await prisma.palestra.findMany({
-      where: {data: data ? new Date(`${data}T00:00:00.000Z`) : undefined}
+      where: { data: data ? new Date(`${data}T00:00:00.000Z`) : undefined }
     });
 
-    return res.status(200).json(search); 
+    return res.status(200).json(search);
 
   } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Erro interno" });
+    console.error(error);
+    return res.status(500).json({ error: "Erro interno" });
   }
 });
 
 app.post("/Cronograma", async (req, res) => {
   const { data } = req.body;
-  try {
 
-    const search = await prisma.cronograma.findMany({
-      where: {data: data ? new Date(`${data}T00:00:00.000Z`) : undefined}
+  try {
+    const dataBusca = data ? new Date(`${data}T00:00:00.000Z`) : undefined;
+
+    const cursosRaw = await prisma.data_crono.findMany({
+      where: { data: dataBusca },
+      include: {
+        curso: true
+      }
     });
 
-    return res.status(200).json(search); 
+    const cursosFormatados = cursosRaw.map((dc) => ({
+      horario: dc.HoraIni || dc.data,
+      atividade: dc.curso?.nome || 'Atividade sem nome',
+      LocalLink: dc.curso?.local || 'Não informado',
+      formato: dc.curso?.tipo || 'Presencial'
+    }));
+
+    const palestrasRaw = await prisma.palestra.findMany({
+      where: { data: dataBusca }
+    });
+
+    const palestrasFormatadas = palestrasRaw.map((p) => ({
+      horario: p.horario || p.data,
+      atividade: p.nome || 'Palestra sem nome',
+      LocalLink: p.local || 'Não informado',
+      formato: p.modalidade || 'Presencial'
+    }));
+
+    const cronogramaUnificado = [...cursosFormatados, ...palestrasFormatadas];
+
+    cronogramaUnificado.sort((a, b) => {
+      const horaA = a.horario ? new Date(a.horario).getTime() : 0;
+      const horaB = b.horario ? new Date(b.horario).getTime() : 0;
+      return horaA - horaB;
+    });
+
+    return res.status(200).json(cronogramaUnificado);
 
   } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Erro interno" });
+    console.error(error);
+    return res.status(500).json({ error: "Erro interno no servidor" });
   }
 });
 
@@ -155,11 +195,11 @@ app.get("/patrocinador", async (req, res) => {
       }
     });
 
-    return res.status(200).json(search); 
+    return res.status(200).json(search);
 
   } catch (error) {
-      console.error(error);
-      return res.status(500).json({ error: "Erro interno" });
+    console.error(error);
+    return res.status(500).json({ error: "Erro interno" });
   }
 });
 

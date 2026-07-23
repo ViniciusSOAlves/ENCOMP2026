@@ -95,7 +95,23 @@ const Curso = () => {
                                         <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
                                             <strong>Tipo:</strong> {i.tipo}
                                         </li>
+                                        {i.datas_crono && i.datas_crono.length > 0 && (
+                                            <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
+                                                <strong>Datas:</strong>
+                                                {/* Sub-lista sem bordas */}
+                                                <ul className="list-unstyled mb-0 mt-1 ps-2">
+                                                    {i.datas_crono.map((crono) => (
+                                                        <li key={crono.id}>
+                                                            - {new Date(crono.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
+                                                        </li>
+                                                    ))}
+                                                </ul>
+                                            </li>
+                                        )}
                                     </ul>
+
+
+
                                 </div>
 
                             </div>

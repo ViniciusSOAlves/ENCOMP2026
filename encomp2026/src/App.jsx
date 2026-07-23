@@ -50,62 +50,66 @@ function App() {
       </header>
 
 
-      <main className="mt-5 mb-5">
-        <div className="row bg-black d-flex justify-content-between p-5">
+      <main className="overflow-hidden">
 
-          <div className="col-12 text-center">
-            <h1 className="fw-bold text-light mb-5">
-              <span className="cor">{'{'}</span>
-              História do ENCOMP
-              <span className="cor">{'}'}</span>
-            </h1>
-          </div>
+        <div className="container py-5">
+          <div className="row bg-black d-flex justify-content-between p-5">
+            <div className="col-12 text-center">
+              <h1 className="fw-bold text-light mb-5">
+                <span className="cor">{'{'}</span>
+                História do ENCOMP
+                <span className="cor">{'}'}</span>
+              </h1>
+            </div>
 
-          <div className="col-1">
-          </div>
-          <div className="col-3">
-            <img className=" float-start" src="logoBranca.png" style={{ height: 'auto', width: '180px' }} />
-          </div>
+            <div className="col-1">
+            </div>
+            <div className="col-3">
+              <img className=" float-start" src="logoBranca.png" style={{ height: 'auto', width: '180px' }} />
+            </div>
 
-          <div className="col-7 text-start text-light ms-3 fs-18 w-50">
-            <p style={{ textAlign: 'justify' }}>
-              O Encontro de Computação (ENCOMP) surgiu em 2015 como uma iniciativa dos estudantes e professores do curso Bacharelado em Ciência da Computação do IFSULDEMINAS - Campus Passos, com o objetivo de aproximar a comunidade acadêmica do mercado de trabalho e das tendências tecnológicas.
-            </p>
-            <p style={{ textAlign: 'justify' }}>
-              Ao longo dos anos, o evento cresceu e se consolidou como uma das principais conferências de tecnologia da região, atraindo participantes de diversas instituições e profissionais renomados do setor.
-            </p>
-            <p style={{ textAlign: 'justify' }}>
-              Para 2026, o ENCOMP chega à sua 11ª edição com uma programação especial, trazendo temas inovadores como Inteligência Artificial, Cloud Computing, Edição de Vídeo e muito mais.
-            </p>
+            <div className="col-7 text-start text-light ms-3 fs-18 w-50">
+              <p style={{ textAlign: 'justify' }}>
+                O Encontro de Computação (ENCOMP) surgiu em 2015 como uma iniciativa dos estudantes e professores do curso Bacharelado em Ciência da Computação do IFSULDEMINAS - Campus Passos, com o objetivo de aproximar a comunidade acadêmica do mercado de trabalho e das tendências tecnológicas.
+              </p>
+              <p style={{ textAlign: 'justify' }}>
+                Ao longo dos anos, o evento cresceu e se consolidou como uma das principais conferências de tecnologia da região, atraindo participantes de diversas instituições e profissionais renomados do setor.
+              </p>
+              <p style={{ textAlign: 'justify' }}>
+                Para 2026, o ENCOMP chega à sua 12ª edição com uma programação especial, trazendo temas inovadores como Inteligência Artificial, Cloud Computing, Edição de Vídeo e muito mais.
+              </p>
+            </div>
+            <div className="col-1">
+            </div>
           </div>
-          <div className="col-1">
-          </div>
-
         </div>
+
+        <hr className='mx-auto' style={{ borderColor: 'var(--cor6)', opacity: 1,borderWidth: '3px',width:'95%' }} />
         <SobreIF />
 
+        <hr className='mx-auto' style={{ borderColor: 'var(--cor6)', opacity: 1,borderWidth: '3px',width:'95%' }} />
         <Cronograma />
 
+        <hr className='mx-auto' style={{ borderColor: 'var(--cor6)', opacity: 1,borderWidth: '3px',width:'95%' }} />
         <Palestras />
 
-        {/* A gente ainda vai fazer a parte de dividir em seções quando decidirmos quais as categorias, ou se vai ser por dia, ou noturno/diurno */}
+        <hr className='mx-auto' style={{ borderColor: 'var(--cor6)', opacity: 1,borderWidth: '3px',width:'95%' }} />
         <Curso />
 
+        <hr className='mx-auto' style={{ borderColor: 'var(--cor6)', opacity: 1,borderWidth: '3px',width:'95%' }} />
         <Equipe />
 
+        <hr className='mx-auto' style={{ borderColor: 'var(--cor6)', opacity: 1,borderWidth: '3px',width:'95%' }} />
         <Patrocinadores />
-
+        <hr className='mx-auto' style={{ borderColor: 'var(--cor6)', opacity: 1,borderWidth: '3px',width:'95%' }} />
         <Acordeon />
       </main >
 
       <footer className="text-center text-lg-start bg-body-tertiary bg-dark" >
         <section className="bg-dark text-light pt-5 mt-5">
           <div className="container text-center text-md-start">
-            {/* */}
             <div className="row">
-              {/* */}
               <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 ">
-                {/* */}
                 <h6 className="text-uppercase fw-bold mb-4 text-light">
                   <i className="fas fa-gem"></i>ENCOMP 2026
                 </h6>
@@ -114,9 +118,7 @@ function App() {
                 </p>
               </div>
 
-              {/* Removed mt-5 from the line below */}
-              <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style={{color:'var(--cor5)'}}>
-                {/* */}
+              <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style={{ color: 'var(--cor5)' }}>
                 <h6 className="text-uppercase fw-bold mb-4 text-light">
                   Products
                 </h6>
@@ -127,11 +129,8 @@ function App() {
                   <i className="bi bi-whatsapp"></i>
                 </p>
               </div>
-              {/* */}
 
-              {/* */}
               <div className="col-md-3 col-lg-2 col-xl-3 mx-auto mb-4">
-                {/* */}
                 <h6 className="text-uppercase fw-bold mb-4 text-light" >
                   Contato
                 </h6>
@@ -142,7 +141,7 @@ function App() {
                   Rua da Penha, 290 - Penha II
                 </p>
                 <p>
-                   Passos - MG, 37903-070
+                  Passos - MG, 37903-070
                 </p>
                 <p>
                   janaina.leite@ifsuldeminas.edu.br
@@ -151,17 +150,14 @@ function App() {
                   (35) 3526-4856
                 </p>
               </div>
-              {/* */}
             </div>
-            {/* */}
           </div>
         </section>
 
         <div className="text-center p-4 text-light" style={{ backgroundColor: "black" }}>
           © 2026 Copyright:
-          Alunos do curso Bacharelado em Ciência da Computação - 5°/6° período 
+          Alunos do curso Bacharelado em Ciência da Computação - 5°/6° período
         </div>
-        {/* */}
       </footer>
     </>
   )

@@ -103,7 +103,9 @@ const Cronograma = () => {
                                 crono.map((i) => (
                                     <tr key={i.id} className="border-bottom border-secondary">
                                         <td className="fw-bold fs-5">
-                                            {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : "--:--"}
+                                            {i.horario && !i.horario.includes('T00:00:00.000Z')
+                                                ? new Date(i.horario).toLocaleTimeString('pt-BR', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' })
+                                                : "--:--"}
                                         </td>
                                         <td>
                                             <span className="d-block text-secondary small">Atividade</span>
