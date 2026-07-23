@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Tempo de geração: 29/06/2026 às 00:14
+-- Tempo de geração: 23/07/2026 às 13:51
 -- Versão do servidor: 8.4.7
 -- Versão do PHP: 8.3.28
 
@@ -65,14 +65,14 @@ CREATE TABLE IF NOT EXISTS `cursos` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `foto` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `ministrantes` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `ministrantes` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `cargahoraria` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `vagas` int DEFAULT NULL,
-  `diaSemana` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `descri` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `tipo` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nivel` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `data` date DEFAULT NULL,
+  `quantDias` int DEFAULT NULL,
+  `local` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -80,18 +80,55 @@ CREATE TABLE IF NOT EXISTS `cursos` (
 -- Despejando dados para a tabela `cursos`
 --
 
-INSERT INTO `cursos` (`id`, `nome`, `foto`, `ministrantes`, `cargahoraria`, `vagas`, `diaSemana`, `descri`, `tipo`, `nivel`, `data`) VALUES
-(1, 'pao de batata', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffffffffffff', 'presencial', 'Entusiasta', NULL),
-(2, 'pao de batata integral', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Entusiasta', NULL),
-(3, 'pao de batata com queijo', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Entusiasta', NULL),
-(4, 'pao de batata gourmet', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Basico', NULL),
-(5, 'pao de batata tradicional', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Basico', NULL),
-(6, 'pao de batata especial', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Medio', NULL),
-(7, 'pao de batata caseiro', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Medio', NULL),
-(8, 'pao de batata fofinho', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Medio', NULL),
-(9, 'pao de batata recheado', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Avancado', NULL),
-(10, 'pao de batata de forno', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Avancado', NULL),
-(11, 'pao de batata mestre', 'paodebatata.jpg', 'Pao de batata e Pao de ce', '12', 45, '3', 'effffffffffffffffffffffffffffffffffff', 'presencial', 'Avancado', NULL);
+INSERT INTO `cursos` (`id`, `nome`, `foto`, `ministrantes`, `cargahoraria`, `vagas`, `descri`, `tipo`, `nivel`, `quantDias`, `local`) VALUES
+(1, 'Currículo Lattes: Do Cadastro à Gestão da Produção Acadêmica', 'Deivid(site).png', 'Deivid Barbosa Maia e Helen Dessa', '5', 0, 'effffffffffffffffffffffffffffffffffffffffffff', 'Online', 'Entusiasta', 2, 'Google Meet'),
+(2, 'Uso de Agentes de IA na Criação de MVP’s', 'eduardo e gabrielreis(site).png', 'Eduardo Veronezi e Gabriel Reis', '3', 20, 'effffffffffffffffffffffffffffffffffff', 'Presencial', 'Entusiasta', 1, NULL),
+(4, 'Java: Introdução à Programação Orientada a Objetos', 'foto ronald e lucas(site).png', 'Lucas Abreu Silveira e Ronald Carneiro Junior', '9', 10, 'effffffffffffffffffffffffffffffffffff', 'Presencial', 'Basico', 3, NULL),
+(5, 'Introdução Git e Git Hub', 'gustavo e maria (site).png', 'Gustavo Maximiano Batista e Maria Luciana Teixeira', '5', 20, 'effffffffffffffffffffffffffffffffffff', 'Presencial', 'Basico', 2, NULL),
+(6, 'Introdução a Lógica de Programação', 'icaro e otero(site).png', 'Gabriel Otero Freire e Ícaro de Andrade Honório', '8', 16, 'effffffffffffffffffffffffffffffffffff', 'Online', 'Medio', 2, 'Google Meet'),
+(7, 'Como se Destacar no Mercado de Trabalho', 'Junior (site).jpeg', 'Maria Eduarda Silva Souza e  Junio Paulino Silva', '4', 0, 'effffffffffffffffffffffffffffffffffff', 'Online', 'Medio', 2, 'Google Meet'),
+(10, 'Introdução ao Arduino: Lógica e Prática de Circuitos', 'rodrigo e emanuel (site).png', 'Rodrigo Miranda e Emanuel Ribeiro', '6', 10, 'effffffffffffffffffffffffffffffffffff', 'Presencial', 'Avancado', 2, 'Laboratório Redes'),
+(11, 'Introdução a Montagem e Manutenção e Formatação de Computadores', 'vinicius e gabriel (site).png', 'Gabriel Amaral dos Reis e Vinicius dos Santos Oliveira Alves', '9', 12, 'effffffffffffffffffffffffffffffffffff', 'Presencial', 'Avancado', 3, 'Laboratório Hardware');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `data_crono`
+--
+
+DROP TABLE IF EXISTS `data_crono`;
+CREATE TABLE IF NOT EXISTS `data_crono` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `data` date DEFAULT NULL,
+  `HoraIni` time DEFAULT NULL,
+  `HoraFim` time DEFAULT NULL,
+  `id_curso` int DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_curso` (`id_curso`)
+) ENGINE=MyISAM AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `data_crono`
+--
+
+INSERT INTO `data_crono` (`id`, `data`, `HoraIni`, `HoraFim`, `id_curso`) VALUES
+(1, '2026-10-26', '08:00:00', NULL, 1),
+(2, '2026-10-27', NULL, NULL, 1),
+(3, '2026-10-28', NULL, NULL, 2),
+(4, '2026-10-29', NULL, NULL, 10),
+(5, '2026-10-30', NULL, NULL, 10),
+(6, '2026-10-26', '14:00:00', NULL, 11),
+(7, '2026-10-27', NULL, NULL, 11),
+(8, '2026-10-28', NULL, NULL, 11),
+(9, '2026-10-26', NULL, NULL, 6),
+(10, '2026-10-27', NULL, NULL, 6),
+(11, '2026-10-28', NULL, NULL, 7),
+(12, '2026-10-29', NULL, NULL, 7),
+(13, '2026-10-26', NULL, NULL, 4),
+(14, '2026-10-27', NULL, NULL, 4),
+(15, '2026-10-28', NULL, NULL, 4),
+(16, '2026-10-29', NULL, NULL, 5),
+(17, '2026-10-30', NULL, NULL, 5);
 
 -- --------------------------------------------------------
 
