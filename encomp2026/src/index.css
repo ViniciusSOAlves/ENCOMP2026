@@ -12,10 +12,11 @@
   --cor8: #4c0c87;
 }
 
-body {
-  background-color: #000; 
-  color: #fff; 
+html,
+body,
+#root {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #000;
 }
-
-
-

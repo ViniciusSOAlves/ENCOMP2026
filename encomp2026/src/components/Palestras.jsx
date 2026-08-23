@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+
 const Palestras = () => {
   const [palestra, setPalestra] = useState([]);
   const [filtro, setFiltro] = useState({ data: "2026-10-26" });
@@ -6,23 +7,19 @@ const Palestras = () => {
   const buscaPalestra = async () => {
     const busca = await fetch('http://localhost:5000/BuscaPalestra', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(filtro)
     })
     const data = await busca.json();
     setPalestra(data);
   }
-  const lidarComFiltro = (evento) => {
-    setFiltro({ data: evento.target.value });
-  };
+
+  const lidarComFiltro = (evento) => setFiltro({ data: evento.target.value });
 
   useEffect(() => {
     buscaPalestra();
   }, [filtro]);
 
-  // Função que calcula o estilo do botão puxando as variáveis CSS
   const estiloBotao = (dataBotao) => {
     const isSelecionado = filtro.data === dataBotao;
     return {
@@ -37,69 +34,77 @@ const Palestras = () => {
   };
 
   return (
-    <div className="row mt-5 mb-5 g-4 justify-content-center">
-      <div className="col-12 text-center">
-        <h1 className="fw-bold text-light mb-5">
-          <span className="cor">{'{'}</span>
-          Palestras
-          <span className="cor">{'}'}</span>
-        </h1>
-      </div>
-      <div className="d-flex flex-wrap justify-content-center gap-3 mb-5">
-        <div>
-          <input type="radio" className="btn-check" id="dia1" value="2026-10-26" onChange={lidarComFiltro} checked={filtro.data === "2026-10-26"} name="dia" />
-          <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-26")} htmlFor="dia1">Segunda-feira</label>
-        </div>
-        <div>
-          <input type="radio" className="btn-check" id="dia2" value="2026-10-27" onChange={lidarComFiltro} checked={filtro.data === "2026-10-27"} name="dia" />
-          <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-27")} htmlFor="dia2">Terça-feira</label>
-        </div>
-        <div>
-          <input type="radio" className="btn-check" id="dia3" value="2026-10-28" onChange={lidarComFiltro} checked={filtro.data === "2026-10-28"} name="dia" />
-          <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-28")} htmlFor="dia3">Quarta-feira</label>
-        </div>
-        <div>
-          <input type="radio" className="btn-check" id="dia4" value="2026-10-29" onChange={lidarComFiltro} checked={filtro.data === "2026-10-29"} name="dia" />
-          <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-29")} htmlFor="dia4">Quinta-feira</label>
-        </div>
-        <div>
-          <input type="radio" className="btn-check" id="dia5" value="2026-10-30" onChange={lidarComFiltro} checked={filtro.data === "2026-10-30"} name="dia" />
-          <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-30")} htmlFor="dia5">Sexta-feira</label>
+    <div className="container py-5">
+      
+      {/* TÍTULO */}
+      <div className="row">
+        <div className="col-12 text-center mb-5">
+          <h1 className="fw-bold text-light m-0">
+            <span className="cor">{'{'}</span> Palestras <span className="cor">{'}'}</span>
+          </h1>
         </div>
       </div>
 
-      {
-        Array.isArray(palestra) && palestra.length > 0 ? (
-
-          palestra.map((i) => (
-
-            <div className='col-12 col-md-6 col-lg-4' key={i.id} >
-              <div className="card bg-dark text-light h-100  p-3" style={{ border: '3px solid var(--cor8)' }}>
-
-                <div className="card-body" id={i.id} >
-                  <img src={"/" + i.foto} alt={i.foto} className='img-fluid w-100' style={{ height: '500px', objectFit: 'cover' }} />
-                  <h4 className='card-title mt-3'>{i.nome}</h4>
-                  <h6 className='card-text'>{i.palestrante}, {i.status}</h6>
-                  <p className='card-text'>{i.descri}</p>
+      {/* FILTROS */}
+      <div className="row">
+        <div className="col-12 mb-5">
+          <div className="d-flex flex-wrap justify-content-center gap-2 gap-md-3">
+            {["2026-10-26", "2026-10-27", "2026-10-28", "2026-10-29", "2026-10-30"].map((data, index) => {
+              const dias = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"];
+              return (
+                <div key={data}>
+                  <input type="radio" className="btn-check" id={`diaPalestra${index}`} value={data} onChange={lidarComFiltro} checked={filtro.data === data} name="diaPalestra" />
+                  <label className="btn rounded-pill px-3 px-md-4" style={estiloBotao(data)} htmlFor={`diaPalestra${index}`}>
+                    {dias[index]}
+                  </label>
                 </div>
-                <ul className='list-group list-group-flush bg-transparent'>
-                  <li className='list-group-item bg-transparent text-light'>Área: {i.tema}</li>
-                  <li className='list-group-item bg-transparent text-light'>Data: {i.data ? new Date(i.data).toLocaleDateString('pt-BR') : "Não informada"}</li>
-                  <li className='list-group-item bg-transparent text-light'>Hora: {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : "Não informada"}</li>
-                  <li className='list-group-item bg-transparent text-light'>Local: {i.local}</li>
-                  <li className='list-group-item bg-transparent text-light'>Modalidade: {i.modalidade}</li>
-                </ul>
+              );
+            })}
+          </div>
+        </div>
+      </div>
 
+      {/* CONTEÚDO */}
+      <div className="row g-4 justify-content-center">
+        {Array.isArray(palestra) && palestra.length > 0 ? (
+          palestra.map((i) => (
+            <div className="col-12 col-sm-6 col-lg-3" key={i.id}>
+              <div className="card h-100 shadow-sm" style={{ border: "3px solid var(--cor8)", borderRadius: "15px", overflow: "hidden", backgroundColor: "#1e1e1e" }}>
+                <div className="card-body p-3 text-light" id={i.id}>
+                  <img src={"/" + i.foto} alt={i.foto} className="img-fluid rounded mb-3 w-100 imagem-palestra" />
+                  <h4 className="card-title fw-bold text-center">{i.nome}</h4>
+                  <p className="card-text text-center text-muted small mb-2">{i.palestrante} • {i.status}</p>
+                  <p className="card-text text-secondary text-center small mb-3">{i.descri}</p>
+
+                  <ul className="list-group list-group-flush mt-auto px-0">
+                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
+                      <strong style={{ color: 'var(--cor6)' }}>Área:</strong> {i.tema}
+                    </li>
+                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
+                      <strong style={{ color: 'var(--cor6)' }}>Data:</strong> {i.data ? new Date(i.data).toLocaleDateString('pt-BR') : "Não informada"}
+                    </li>
+                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
+                      <strong style={{ color: 'var(--cor6)' }}>Hora:</strong> {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : "Não informada"}
+                    </li>
+                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
+                      <strong style={{ color: 'var(--cor6)' }}>Local:</strong> {i.local}
+                    </li>
+                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2 mb-0 border-bottom-0">
+                      <strong style={{ color: 'var(--cor6)' }}>Modalidade:</strong> {i.modalidade}
+                    </li>
+                  </ul>
+                </div>
               </div>
             </div>
-
           ))
         ) : (
-          <p className='text-light'>Nenhuma palestra encontrada.</p>
-        )
-      }
+          <div className="col-12 text-center">
+            <p className="text-light">Nenhuma palestra encontrada.</p>
+          </div>
+        )}
+      </div>
     </div>
   )
 }
 
-export default Palestras
+export default Palestras;

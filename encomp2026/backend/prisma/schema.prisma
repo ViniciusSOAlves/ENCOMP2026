@@ -11,13 +11,13 @@ model cursos {
   id           Int          @id @default(autoincrement())
   nome         String?      @db.VarChar(255)
   foto         String?      @db.VarChar(255)
-  ministrantes String?      @db.VarChar(25)
-  cargahoraria String?      @db.VarChar(255)
-  vagas        Int?
+  ministrantes String?      @db.VarChar(255)
+  cargahoraria Int?         @db.UnsignedTinyInt
+  vagas        Int?         @db.UnsignedTinyInt
   descri       String?      @db.Text
   tipo         String?      @db.VarChar(20)
   nivel        String       @db.VarChar(50)
-  quantDias    Int?
+  quantDias    Int?         @db.UnsignedTinyInt
   local        String?      @db.VarChar(50)
 
   // Relação inversa: 1 curso pode ter várias datas no cronograma
@@ -38,20 +38,12 @@ model palestra {
   modalidade  String?   @db.VarChar(255)
 }
 
-model cronograma {
-  id        Int       @id @default(autoincrement())
-  data      DateTime? @db.Date
-  horario   DateTime? @db.Time(0)
-  atividade String?   @db.VarChar(255)
-  formato   String?   @db.VarChar(255)
-  LocalLink String?   @db.VarChar(255)
-}
-
 model patrocinador {
   id   Int     @id @default(autoincrement())
   nome String? @db.VarChar(255)
   foto String? @db.VarChar(255)
 }
+
 model data_crono {
   id       Int       @id @default(autoincrement())
   data     DateTime? @db.Date
