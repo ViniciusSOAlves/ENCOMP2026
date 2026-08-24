@@ -87,8 +87,9 @@ const Cronograma = () => {
                                 </thead>
                                 <tbody>
                                     {Array.isArray(crono) && crono.length > 0 ? (
-                                        crono.map((i) => (
-                                            <tr key={i.id} className="border-bottom border-secondary">
+                                        /* Correção aplicada aqui embaixo! O index foi adicionado e usado na key */
+                                        crono.map((i, index) => (
+                                            <tr key={`linha-${index}`} className="border-bottom border-secondary">
                                                 <td className="fw-bold fs-6 fs-md-5 text-nowrap">
                                                     {i.horario && !i.horario.includes('T00:00:00.000Z')
                                                         ? new Date(i.horario).toLocaleTimeString('pt-BR', { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' })
