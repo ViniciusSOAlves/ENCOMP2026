@@ -35,12 +35,12 @@ const Palestras = () => {
 
   return (
     <div className="container py-5">
-      
+
       {/* TÍTULO */}
       <div className="row">
         <div className="col-12 text-center mb-5">
           <h1 className="fw-bold text-light m-0">
-            <span className="cor">{'{'}</span> Palestras <span className="cor">{'}'}</span>
+            <span className="cor" id='palestras'>{'{'}</span> Palestras <span className="cor">{'}'}</span>
           </h1>
         </div>
       </div>
@@ -68,20 +68,20 @@ const Palestras = () => {
       <div className="row g-4 justify-content-center">
         {Array.isArray(palestra) && palestra.length > 0 ? (
           palestra.map((i) => (
-            <div className="col-12 col-sm-6 col-lg-3" key={i.id}>
+            <div className="col-12 col-md-6 col-lg-4" key={i.id}>
               <div className="card h-100 shadow-sm" style={{ border: "3px solid var(--cor8)", borderRadius: "15px", overflow: "hidden", backgroundColor: "#1e1e1e" }}>
                 <div className="card-body p-3 text-light" id={i.id}>
-                  <img src={"/" + i.foto} alt={i.foto} className="img-fluid rounded mb-3 w-100 imagem-palestra" />
+                  <img src={"/FotosPalestras/" + i.foto} alt={i.foto} className='img-fluid rounded mb-3 w-100 imagem-palestra' />
                   <h4 className="card-title fw-bold text-center">{i.nome}</h4>
                   <p className="card-text text-center text-muted small mb-2">{i.palestrante} • {i.status}</p>
-                  <p className="card-text text-secondary text-center small mb-3">{i.descri}</p>
+                  <p className="card-text  text-center small mb-3">{i.descri}</p>
 
                   <ul className="list-group list-group-flush mt-auto px-0">
                     <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
                       <strong style={{ color: 'var(--cor6)' }}>Área:</strong> {i.tema}
                     </li>
                     <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
-                      <strong style={{ color: 'var(--cor6)' }}>Data:</strong> {i.data ? new Date(i.data).toLocaleDateString('pt-BR') : "Não informada"}
+                      <strong style={{ color: 'var(--cor6)' }}>Data:</strong> {i.data ? new Date(i.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) : "Não informada"}
                     </li>
                     <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
                       <strong style={{ color: 'var(--cor6)' }}>Hora:</strong> {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : "Não informada"}

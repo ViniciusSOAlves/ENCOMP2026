@@ -40,7 +40,7 @@ const Curso = () => {
       <div className="row">
         <div className="col-12 text-center mb-5">
           <h1 className="fw-bold text-light m-0">
-            <span className="cor">{"{"}</span> Minicursos <span className="cor">{"}"}</span>
+            <span className="cor" id="minicursos">{"{"}</span> Minicursos <span className="cor">{"}"}</span>
           </h1>
         </div>
       </div>
@@ -80,7 +80,7 @@ const Curso = () => {
                       <strong style={{ color: 'var(--cor6)' }}>Carga horária:</strong> {i.cargahoraria}
                     </li>
                     <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
-                      <strong style={{ color: 'var(--cor6)' }}>Vagas:</strong> {i.vagas}
+                      <strong style={{ color: 'var(--cor6)' }}>Vagas:</strong> {i.vagas == 0 ? 'Ilimitado' : i.vagas}
                     </li>
                     <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
                       <strong style={{ color: 'var(--cor6)' }}>Tipo:</strong> {i.tipo}

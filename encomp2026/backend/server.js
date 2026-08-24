@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2');
@@ -5,102 +6,157 @@ const multer = require('multer');
 const path = require('path');
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
+const bcrypt = require('bcryptjs');
+const session = require('express-session');
 
 const app = express();
 
 // Middlewares
-app.use(cors());
+// Middlewares
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true
+}));
+
 app.use(express.json());
 
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: false,
+    maxAge: 10 * 60 * 1000
+  }
+}));
+
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, path.join(__dirname, '..', 'public')); // <- CORRETO
+  destination: function (req, file, cb) {
+    cb(null, '../public/FotosEquipe');
   },
-  filename: (req, file, cb) => {
-    if (!file) {
-      return cb(new Error("Arquivo não enviado"));
+
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const upload = multer({
+  storage: storage,
+
+  fileFilter: function (req, file, cb) {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true);
+    } else {
+      cb(new Error('Formato inválido! Envie apenas .jpeg ou .png.'), false);
     }
-    cb(null, Date.now() + '-' + file.originalname);
   }
 });
 
-const upload = multer({ storage });
+const storagePalestra = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../public/FotosPalestras');
+  },
 
-app.post("/usuario", upload.single("fotoUp"), async (req, res) => {
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const uploadPalestra = multer({
+  storage: storagePalestra,
+
+  fileFilter: function (req, file, cb) {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true);
+    } else {
+      cb(new Error('Formato inválido! Envie apenas .jpeg ou .png.'), false);
+    }
+  }
+});
+
+const storagePatrocinador = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '../public/patrocinadores');
+  },
+
+  filename: function (req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+const uploadPatrocinador = multer({
+  storage: storagePatrocinador,
+
+  fileFilter: function (req, file, cb) {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png') {
+      cb(null, true);
+    } else {
+      cb(new Error('Formato inválido! Envie apenas .jpeg ou .png.'), false);
+    }
+  }
+});
+
+function verificarAdmin(req, res, next) {
+  if (!req.session.admin) {
+    return res.status(401).json({
+      error: "Acesso não autorizado."
+    });
+  }
+
+  next();
+}
+
+app.post('/login', async (req, res) => {
+  const { usuario, senha } = req.body;
+
+  const user = "PAODEBATATAEBOM123";
+  const senhaSegura = '$2b$10$JTySk0ZabCoYyBTlQFM5.eYc2pdbnIyIfl9WOyI4hBjRn4gWlQGi6';
+
   try {
-    const { nome, foto, descri, locate, dataAc } = req.body;
-
-    //valida se o arquivo veio
-    if (!req.file) {
-      return res.status(400).json({ erro: "Arquivo não enviado" });
+    if (usuario !== user) {
+      return res.status(401).json({
+        error: "user ou senha incorretos."
+      });
     }
 
-    console.log("===== ARQUIVO =====");
-    console.log(req.file);
+    const senhaValida = await bcrypt.compare(senha, senhaSegura);
 
-    const novo = await prisma.cursos.create({
-      data: {
-        nome,
-        foto,
-        descricao: descri,
-        dataAc: new Date(dataAc),
-        locate
-      }
+    if (!senhaValida) {
+      return res.status(401).json({
+        error: "user ou senha incorretos."
+      });
+    }
+
+    // Cria a autenticação na sessão
+    req.session.admin = true;
+
+    return res.status(200).json({
+      message: "Login de administrador aprovado!"
     });
 
-    res.json(novo);
+  } catch (error) {
+    console.error("Erro no login:", error);
 
-
-  } catch (err) {
-    console.error("ERRO NO BACKEND:", err);
-    res.status(500).json({ erro: err.message });
-  }
-});
-
-app.get("/lista", async (req, res) => {
-  try {
-    const result = await prisma.cursos.findMany();
-    res.json(result);
-  } catch (err) {
-    console.error("ERRO:", err);
-    res.status(500).json({ erro: err.message });
-  }
-});
-app.delete("/delete", async (req, res) => {
-  try {
-    const { id } = req.body;
-    const result = await prisma.cursos.delete({
-      where: { id: Number(id) }
+    return res.status(500).json({
+      error: "Erro interno no servidor."
     });
-
-    res.json(result);
-  } catch (err) {
-    console.error("ERRO:", err);
-    res.status(500).json({ erro: err.message });
   }
 });
-/* 
-app.update("/utualiza", async (req, res) => {
-  try {
-    const {id, nome, foto, descri, locate, dataAc } = req.body;
-    const result = await prisma.cursos.update({
-      where: { id: Number(id)},
-      data: {
-        nome: nome,
-        foto: foto,
-        descricao: descri,
-        dataAc: new Date(dataAc),
-        locate: locate
-      }
+
+app.get('/verificaAdmin', (req, res) => {
+  if (req.session.admin) {
+    return res.status(200).json({
+      autenticado: true
     });
-    res.json(result);
-  } catch (err) {
-    console.error("ERRO:", err);
-    res.status(500).json({ erro: err.message });
   }
+
+  return res.status(401).json({
+    autenticado: false
+  });
 });
 
-*/
+
 app.post("/BuscaCurso", async (req, res) => {
   const { nivel } = req.body;
   try {
@@ -144,10 +200,14 @@ app.post("/Cronograma", async (req, res) => {
   const { data } = req.body;
 
   try {
-    const dataBusca = data ? new Date(`${data}T00:00:00.000Z`) : undefined;
+    const dataBusca = data
+      ? new Date(`${data}T00:00:00.000Z`)
+      : undefined;
 
     const cursosRaw = await prisma.data_crono.findMany({
-      where: { data: dataBusca },
+      where: {
+        data: dataBusca
+      },
       include: {
         curso: true
       }
@@ -161,7 +221,9 @@ app.post("/Cronograma", async (req, res) => {
     }));
 
     const palestrasRaw = await prisma.palestra.findMany({
-      where: { data: dataBusca }
+      where: {
+        data: dataBusca
+      }
     });
 
     const palestrasFormatadas = palestrasRaw.map((p) => ({
@@ -171,11 +233,29 @@ app.post("/Cronograma", async (req, res) => {
       formato: p.modalidade || 'Presencial'
     }));
 
-    const cronogramaUnificado = [...cursosFormatados, ...palestrasFormatadas];
+    const eventosExtrasRaw = await prisma.eventosExtras.findMany({
+      where: {
+        data: dataBusca
+      }
+    });
+
+    const eventosExtrasFormatados = eventosExtrasRaw.map((e) => ({
+      horario: e.horario || e.data,
+      atividade: e.atividade || 'Atividade sem nome',
+      LocalLink: e.local_link || 'Não informado',
+      formato: e.formato
+    }));
+
+    const cronogramaUnificado = [
+      ...cursosFormatados,
+      ...palestrasFormatadas,
+      ...eventosExtrasFormatados
+    ];
 
     cronogramaUnificado.sort((a, b) => {
       const horaA = a.horario ? new Date(a.horario).getTime() : 0;
       const horaB = b.horario ? new Date(b.horario).getTime() : 0;
+
       return horaA - horaB;
     });
 
@@ -183,7 +263,50 @@ app.post("/Cronograma", async (req, res) => {
 
   } catch (error) {
     console.error(error);
-    return res.status(500).json({ error: "Erro interno no servidor" });
+
+    return res.status(500).json({
+      error: "Erro interno no servidor"
+    });
+  }
+});
+
+app.post("/eventosExtras", async (req, res) => {
+  const { data } = req.body;
+
+  try {
+    const dataBusca = data
+      ? new Date(`${data}T00:00:00.000Z`)
+      : undefined;
+
+    const eventosExtrasRaw = await prisma.eventosExtras.findMany({
+      where: {
+        data: dataBusca
+      }
+    });
+
+    const eventosExtrasFormatados = eventosExtrasRaw.map((e) => ({
+      id: e.id,
+      horario: e.horario,
+      atividade: e.atividade || 'Atividade sem nome',
+      LocalLink: e.local_link || 'Não informado',
+      formato: e.formato
+    }));
+
+    eventosExtrasFormatados.sort((a, b) => {
+      const horaA = a.horario ? new Date(a.horario).getTime() : 0;
+      const horaB = b.horario ? new Date(b.horario).getTime() : 0;
+
+      return horaA - horaB;
+    });
+
+    return res.status(200).json(eventosExtrasFormatados);
+
+  } catch (error) {
+    console.error(error);
+
+    return res.status(500).json({
+      error: "Erro interno no servidor"
+    });
   }
 });
 
@@ -203,6 +326,213 @@ app.get("/patrocinador", async (req, res) => {
   }
 });
 
+app.post('/cadastroCurso', verificarAdmin, upload.single('foto'), async (req, res) => {
+  const {
+    nome,
+    ministrantes,
+    cargaHoraria,
+    vagas,
+    descricao,
+    tipo,
+    nivel,
+    quantDias,
+    local,
+    datas
+  } = req.body;
+  const datasArray = typeof datas === 'string' ? JSON.parse(datas) : datas;
+  try {
+    const newCurso = await prisma.cursos.create({
+      data: {
+        nome,
+        ministrantes,
+        cargahoraria: Number(cargaHoraria),
+        vagas: Number(vagas),
+        descri: descricao,
+        tipo,
+        nivel,
+        quantDias: Number(quantDias),
+        local,
+        foto: req.file ? req.file.filename : null
+      }
+    });
+
+    const horasPorDia = Number(cargaHoraria) / Number(quantDias);
+
+    // Se vagas for 0 (online), começa às 19:30 (19.5), senão começa às 13:30 (13.5)
+    const horaBase = Number(vagas) === 0 ? 19.5 : 13.5;
+    const horaFimDecimal = horaBase + horasPorDia;
+
+    // Strings formatadas
+    const horaInicioStr = Number(vagas) === 0 ? "19:30:00" : "13:30:00";
+
+    const fimHora = Math.floor(horaFimDecimal);
+    const fimMinuto = (horaFimDecimal % 1 !== 0) ? "30" : "00";
+    const horaFimStr = `${String(fimHora).padStart(2, '0')}:${fimMinuto}:00`;
+
+    const idcurso = newCurso.id;
+
+    for (let i = 0; i < (Number(quantDias)); i++) {
+      const newDate = await prisma.data_crono.create({
+        data: {
+          data: new Date(`${datasArray[i]}T00:00:00Z`),
+          HoraIni: new Date(`1970-01-01T${horaInicioStr}Z`),
+          HoraFim: new Date(`1970-01-01T${horaFimStr}Z`),
+          id_curso: idcurso
+        }
+      })
+    }
+    res.status(201).json({ message: 'Cadastro realizado!' });
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: 'Erro no cadastro!' });
+  }
+
+});
+
+app.post('/cadastraPalestra', verificarAdmin,uploadPalestra.single('foto'), async (req, res) => {
+  const {
+    nome,
+    palestrante,
+    status,
+    tema,
+    descri,
+    data,
+    local,
+    modalidade
+  } = req.body;
+
+  try {
+    const newPalestra = await prisma.palestra.create({
+      data: {
+        nome,
+        palestrante,
+        foto: req.file ? req.file.filename : null,
+        status,
+        tema,
+        descri,
+        data: new Date(`${data}T00:00:00Z`),
+        horario: new Date('1970-01-01T10:30:00-03:00'),
+        local,
+        modalidade
+      }
+    });
+
+    res.status(201).json({ message: 'Cadastro realizado!' });
+
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: 'Erro no cadastro!' });
+  }
+});
+
+app.post('/cadastroPatrocinador', verificarAdmin, uploadPatrocinador.single('foto'), async (req, res) => {
+  const { nome } = req.body;
+
+  try {
+    const newPatrocinador = await prisma.patrocinador.create({
+      data: {
+        nome,
+        foto: req.file ? req.file.filename : null
+      }
+    });
+
+    res.status(201).json({ message: 'Cadastro realizado!' });
+
+  } catch (error) {
+    console.error(error);
+    res.status(400).json({ message: 'Erro no cadastro!' });
+  }
+});
+
+app.post('/cadastraEventos', verificarAdmin, async (req, res) => {
+  const {
+    data,
+    horario,
+    atividade,
+    formato,
+    local_link
+  } = req.body;
+
+  try {
+    const novoEvento = await prisma.eventosExtras.create({
+      data: {
+        data: new Date(`${data}T00:00:00Z`),
+        horario: new Date(`1970-01-01T${horario}:00Z`),
+        atividade,
+        formato: formato || null,
+        local_link: local_link || null
+      }
+    });
+
+    res.status(201).json({
+      message: 'Cadastro realizado!',
+      evento: novoEvento
+    });
+
+  } catch (error) {
+    console.error(error);
+
+    res.status(400).json({
+      message: 'Erro no cadastro!'
+    });
+  }
+});
+
+app.delete("/deleteCurso", verificarAdmin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    const result = await prisma.cursos.delete({
+      where: { id: Number(id) }
+    });
+
+    res.json(result);
+  } catch (err) {
+    console.error("ERRO:", err);
+    res.status(500).json({ erro: err.message });
+  }
+});
+
+app.delete("/deletePalestra", verificarAdmin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    const result = await prisma.palestra.delete({
+      where: { id: Number(id) }
+    });
+
+    res.json(result);
+  } catch (err) {
+    console.error("ERRO:", err);
+    res.status(500).json({ erro: err.message });
+  }
+});
+
+app.delete("/deletePatrocinador", verificarAdmin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    const result = await prisma.patrocinador.delete({
+      where: { id: Number(id) }
+    });
+
+    res.json(result);
+  } catch (err) {
+    console.error("ERRO:", err);
+    res.status(500).json({ erro: err.message });
+  }
+});
+
+app.delete("/deleteEventos", verificarAdmin, async (req, res) => {
+  try {
+    const { id } = req.body;
+    const result = await prisma.eventosExtras.delete({
+      where: { id: Number(id) }
+    });
+
+    res.json(result);
+  } catch (err) {
+    console.error("ERRO:", err);
+    res.status(500).json({ erro: err.message });
+  }
+});
 
 const PORT = 5000;
 app.listen(PORT, () => console.log(`Backend vivo na porta ${PORT}`));

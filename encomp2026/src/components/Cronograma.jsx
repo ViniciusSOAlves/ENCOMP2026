@@ -45,7 +45,7 @@ const Cronograma = () => {
             <div className="row">
                 <div className="col-12 text-center mb-5">
                     <h1 className="fw-bold text-light m-0">
-                        <span className="cor">{'{'}</span> Programação <span className="cor">{'}'}</span>
+                        <span className="cor" id="Programacao">{'{'}</span> Programação <span className="cor">{'}'}</span>
                     </h1>
                 </div>
             </div>
@@ -100,7 +100,7 @@ const Cronograma = () => {
                                                 </td>
                                                 <td>
                                                     <span className="badge rounded-pill border border-warning text-warning bg-transparent px-3 py-2">
-                                                        {i.formato || 'Presencial'}
+                                                        {i.formato || '---'}
                                                     </span>
                                                 </td>
                                                 <td>{i.LocalLink}</td>

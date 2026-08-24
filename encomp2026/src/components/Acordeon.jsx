@@ -9,7 +9,7 @@ const Acordeon = () => {
             <div className="row">
                 <div className="col-12 text-center mb-5">
                     <h1 className="fw-bold text-light m-0">
-                        <span className="cor">{'{'}</span> FAQ <span className="cor">{'}'}</span>
+                        <span className="cor" id='faq'>{'{'}</span> FAQ <span className="cor">{'}'}</span>
                     </h1>
                 </div>
             </div>

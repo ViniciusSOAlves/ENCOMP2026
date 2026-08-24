@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import './App.css'
-import GerenciaCurso from './components/GerenciaCurso'
 import Cronograma from './components/Cronograma'
 import Palestras from './components/Palestras'
 import Curso from './components/Curso'
@@ -8,9 +7,23 @@ import Patrocinadores from './components/Patrocinadores'
 import Acordeon from './components/Acordeon'
 import Equipe from './components/Equipe'
 import SobreIF from './components/SobreIF'
+import { useNavigate } from 'react-router-dom';
 
 function App() {
+  const navigate = useNavigate();
 
+  const [cliques, setCliques] = useState(0);
+
+  const acessarLogin = () => {
+    const novosCliques = cliques + 1;
+
+    if (novosCliques === 5) {
+      navigate("/login");
+      setCliques(0);
+    } else {
+      setCliques(novosCliques);
+    }
+  };
   return (
     <>
       <header className="main-header position-relative">
@@ -20,10 +33,7 @@ function App() {
           src="fundoheader.jpeg"
           alt="Imagem de Fundo"
         />
-
-        {/* NAVBAR BOOTSTRAP - zIndex altíssimo para sobrepor tudo */}
-        <nav className="navbar navbar-expand-lg navbar-dark position-absolute top-0 start-0 w-100" style={{ zIndex: 9999 }}>
-
+        <nav className="navbar navbar-expand-lg navbar-dark fixed-top w-100" style={{ zIndex: 9999 }}>
           <div className="container-fluid">
 
             {/* Logo */}
@@ -57,19 +67,16 @@ function App() {
               {/* Adicionado fundo escuro e padding apenas no mobile (lg) para melhor leitura */}
               <ul className="navbar-nav gap-2 text-center bg-lg-transparent rounded p-3 p-lg-0 mt-2 mt-lg-0 shadow-lg shadow-lg-none">
                 <li className="nav-item">
-                  <a className="nav-link menu-link" href="#">Componente 1</a>
+                  <a className="nav-link menu-link" href="#Programacao">Programação</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link menu-link" href="#">Componente 2</a>
+                  <a className="nav-link menu-link" href="#palestras">Palestras</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link menu-link" href="#">Componente 3</a>
+                  <a className="nav-link menu-link" href="#minicursos">Minicursos</a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link menu-link" href="#">Componente 4</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link menu-link" href="#">Componente 5</a>
+                  <a className="nav-link menu-link" href="#faq">FAQ</a>
                 </li>
               </ul>
             </div>
@@ -117,11 +124,11 @@ function App() {
           <div className="row bg-black d-flex justify-content-between p-5">
             <div className="col-12 text-center">
               <h1 className="fw-bold text-light mb-5">
-                <span className="cor">{'{'}</span> História do ENCOMP <span className="cor">{'}'}</span>
+                <span className="cor">{'{'}</span>História do ENCOMP<span className="cor">{'}'}</span>
               </h1>
             </div>
 
-            <div className="col-12 col-md-3 order-2 order-md-1 d-flex justify-content-center align-items-start">
+            <div className="col-12 col-md-3 order-2 order-md-1 d-none d-md-flex justify-content-center align-items-start">
               <img
                 src="logoBranca.png"
                 style={{ height: 'auto', width: '180px' }}
@@ -145,7 +152,7 @@ function App() {
         </div>
 
 
-        <hr className="mx-auto" style={{ borderColor: 'var(--cor6)', opacity: 1, borderWidth: '1px', width: '95%'}} />
+        <hr className="mx-auto" style={{ borderColor: 'var(--cor6)', opacity: 1, borderWidth: '1px', width: '95%' }} />
         <SobreIF />
 
         <hr className="mx-auto" style={{ borderColor: 'var(--cor6)', opacity: 1, borderWidth: '1px', width: '95%' }} />
@@ -203,7 +210,14 @@ function App() {
         </section>
 
         <div className="text-center p-4 text-light" style={{ backgroundColor: "black" }}>
-          © 2026 Copyright: Alunos do curso Bacharelado em Ciência da Computação - 5°/6° período
+          © 2026 Copyright:
+          Alunos do curso Bacharelado em Ciência da Computação -{" "}
+          <span
+            onClick={acessarLogin}
+            style={{ cursor: "default" }}
+          >
+            5°/6° período
+          </span>
         </div>
       </footer>
     </>

@@ -1,73 +1,45 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import classes from './Cursos.module.css';
+import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap-icons/font/bootstrap-icons.min.css'
 
-const Cursos = () => {
-
-    //BACKEND DE CADASTRO
+const Palestras = () => {
     const navigate = useNavigate();
 
     const [foto, setFoto] = useState(null);
     const [mensagem, setMensagem] = useState("");
 
-    const [formCurso, setFormCurso] = useState({
+    const [formPalestra, setFormPalestra] = useState({
         nome: '',
-        ministrantes: '',
-        cargaHoraria: '',
-        vagas: '',
-        descricao: '',
-        tipo: '',
-        nivel: '',
-        quantDias: '',
+        palestrante: '',
+        status: '',
+        tema: '',
+        descri: '',
+        data: '',
         local: '',
-        datas: []
+        modalidade: ''
     });
 
     const inicioSemana = "2026-10-26";
     const fimSemana = "2026-10-30";
 
     const handleChange = (e) => {
-        setFormCurso({ ...formCurso, [e.target.name]: e.target.value });
-    };
-
-    const handleQuantDiasChange = (e) => {
-        const quantidade = Number(e.target.value);
-
-        setFormCurso((prev) => {
-            const novasDatas = Array.from({ length: quantidade }, (_, i) => prev.datas[i] || '');
-            return {
-                ...prev,
-                quantDias: e.target.value,
-                datas: novasDatas
-            };
-        });
-    };
-
-    const handleDataChange = (index, value) => {
-        setFormCurso((prev) => {
-            const novasDatas = [...prev.datas];
-            novasDatas[index] = value;
-            return {
-                ...prev,
-                datas: novasDatas
-            };
-        });
+        setFormPalestra({ ...formPalestra, [e.target.name]: e.target.value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         const dadosParaEnvio = {
-            nome: formCurso.nome,
-            ministrantes: formCurso.ministrantes,
-            cargaHoraria: formCurso.cargaHoraria,
-            vagas: formCurso.vagas,
-            descricao: formCurso.descricao,
-            tipo: formCurso.tipo,
-            nivel: formCurso.nivel,
-            quantDias: formCurso.quantDias,
-            local: formCurso.local,
-            datas: JSON.stringify(formCurso.datas)
+            nome: formPalestra.nome,
+            palestrante: formPalestra.palestrante,
+            status: formPalestra.status,
+            tema: formPalestra.tema,
+            descri: formPalestra.descri,
+            data: formPalestra.data,
+            local: formPalestra.local,
+            modalidade: formPalestra.modalidade
         };
 
         try {
@@ -81,7 +53,7 @@ const Cursos = () => {
                 dadosFinais.append(key, dadosParaEnvio[key]);
             });
 
-            const response = await fetch('http://localhost:5000/cadastroCurso', {
+            const response = await fetch('http://localhost:5000/cadastraPalestra', {
                 method: 'POST',
                 credentials: "include",
                 body: dadosFinais
@@ -91,29 +63,28 @@ const Cursos = () => {
 
             if (response.ok) {
                 alert("Cadastro realizado com sucesso!");
-                setFormCurso({
+
+                setFormPalestra({
                     nome: '',
-                    ministrantes: '',
-                    cargaHoraria: '',
-                    vagas: '',
-                    descricao: '',
-                    tipo: '',
-                    nivel: '',
-                    quantDias: '',
+                    palestrante: '',
+                    status: '',
+                    tema: '',
+                    descri: '',
+                    data: '',
                     local: '',
-                    datas: []
+                    modalidade: ''
                 });
 
                 setFoto(null);
                 setMensagem("");
 
-                buscaCurso();
+                buscaPalestra();
 
                 const fileInput = document.getElementById("input-foto");
+
                 if (fileInput) {
                     fileInput.value = "";
                 }
-
             } else {
                 alert("Erro: " + (data.error || "Falha ao cadastrar."));
             }
@@ -123,11 +94,13 @@ const Cursos = () => {
         }
     };
 
-    //BACKEND DE BUSCA CURSO
-    const [curso, setCurso] = useState([]);
-    const [filtro, setFiltro] = useState({ nivel: "Entusiasta" });
-    const buscaCurso = async () => {
-        const busca = await fetch('http://localhost:5000/BuscaCurso', {
+
+    //BACKEND DE BUSCA PALESTRA
+    const [palestra, setPalestra] = useState([]);
+    const [filtro, setFiltro] = useState({ data: "2026-10-26" });
+
+    const buscaPalestra = async () => {
+        const busca = await fetch('http://localhost:5000/BuscaPalestra', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -136,14 +109,13 @@ const Cursos = () => {
             body: JSON.stringify(filtro)
         })
         const data = await busca.json();
-        setCurso(data);
+        setPalestra(data);
     }
     const lidarComFiltro = (evento) => {
-        setFiltro({ nivel: evento.target.value });
+        setFiltro({ data: evento.target.value });
     };
-
-    const excluirCurso = async (id) => {
-        const response = await fetch('http://localhost:5000/deleteCurso', {
+    const excluirPalestra = async (id) => {
+        const response = await fetch('http://localhost:5000/deletePalestra', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
@@ -156,18 +128,19 @@ const Cursos = () => {
 
         if (response.ok) {
             alert("Exclusão realizada com sucesso!");
-            buscaCurso();
+            buscaPalestra();
         } else {
             alert("Erro: " + (data.error || "Falha ao excluir."));
         }
     };
 
     useEffect(() => {
-        buscaCurso();
+        buscaPalestra();
     }, [filtro]);
 
-    const estiloBotao = (nivelBotao) => {
-        const isSelecionado = filtro.nivel === nivelBotao;
+    // Função que calcula o estilo do botão puxando as variáveis CSS
+    const estiloBotao = (dataBotao) => {
+        const isSelecionado = filtro.data === dataBotao;
         return {
             color: isSelecionado ? '#ffffff' : 'var(--cor6)',
             backgroundColor: isSelecionado ? 'var(--cor8)' : 'transparent',
@@ -180,43 +153,42 @@ const Cursos = () => {
     };
 
     //VARIAVEL DE ESTILIZACAO
-
     const sectionTitle = "fs-4 fw-bold text-dark mb-4 mt-5 border-bottom pb-2";
 
     return (
-        <div className="container py-4 ">
+        <div className="container py-4">
             <form onSubmit={handleSubmit} className={classes?.formularioPai || ''}>
-                <h2 className={sectionTitle}>Informações do Curso</h2>
+                <h2 className={sectionTitle}>Informações da Palestra</h2>
 
                 <div className="row g-3">
 
                     {/* Nome */}
                     <div className="col-12 col-md-6">
-                        <label className="form-label text-dark">Nome do Curso</label>
+                        <label className="form-label text-dark">Nome da Palestra</label>
                         <input
                             name="nome"
                             type="text"
                             className="form-control"
-                            value={formCurso.nome}
+                            value={formPalestra.nome}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    {/* Ministrantes */}
+                    {/* Palestrante */}
                     <div className="col-12 col-md-6">
-                        <label className="form-label text-dark">Ministrantes</label>
+                        <label className="form-label text-dark">Palestrante</label>
                         <input
-                            name="ministrantes"
+                            name="palestrante"
                             type="text"
                             className="form-control"
-                            value={formCurso.ministrantes}
+                            value={formPalestra.palestrante}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    {/* Upload de Foto */}
+                    {/* Foto */}
                     <div className="col-12">
                         <h2 className={`${sectionTitle} mt-lg-0`}>Foto</h2>
 
@@ -302,93 +274,73 @@ const Cursos = () => {
                         </div>
                     </div>
 
-                    {/* Carga Horária */}
+                    {/* Status */}
                     <div className="col-12 col-md-4">
-                        <label className="form-label text-dark">Carga Horária (horas)</label>
+                        <label className="form-label text-dark">Status</label>
                         <input
-                            name="cargaHoraria"
-                            type="number"
+                            name="status"
+                            type="text"
                             className="form-control"
-                            value={formCurso.cargaHoraria}
+                            value={formPalestra.status}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    {/* Número de Vagas */}
-                    <div className="col-12 col-md-4">
-                        <label className="form-label text-dark">Número de Vagas</label>
+                    {/* Tema */}
+                    <div className="col-12 col-md-8">
+                        <label className="form-label text-dark">Tema</label>
                         <input
-                            name="vagas"
-                            type="number"
+                            name="tema"
+                            type="text"
                             className="form-control"
-                            value={formCurso.vagas}
+                            value={formPalestra.tema}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    {/* Tipo */}
+                    {/* Data */}
                     <div className="col-12 col-md-4">
-                        <label className="form-label text-dark">Tipo</label>
-                        <select
-                            name="tipo"
-                            className="form-select"
-                            value={formCurso.tipo}
+                        <label className="form-label text-dark">Data</label>
+                        <input
+                            name="data"
+                            type="date"
+                            min={inicioSemana}
+                            max={fimSemana}
+                            className="form-control"
+                            value={formPalestra.data}
                             onChange={handleChange}
                             required
-                        >
-                            <option value="" disabled>Selecione</option>
-                            <option value="Online">Online</option>
-                            <option value="Presencial">Presencial</option>
-                        </select>
-                    </div>
-
-                    {/* Nível */}
-                    <div className="col-12 col-md-4">
-                        <label className="form-label text-dark">Nível</label>
-                        <select
-                            name="nivel"
-                            className="form-select"
-                            value={formCurso.nivel}
-                            onChange={handleChange}
-                            required
-                        >
-                            <option value="" disabled>Selecione</option>
-                            <option value="Entusiasta">Entusiasta</option>
-                            <option value="Basico">Básico</option>
-                            <option value="Medio">Médio</option>
-                            <option value="Avancado">Avançado</option>
-                        </select>
+                        />
                     </div>
 
                     {/* Local */}
-                    <div className="col-12 col-md-4">
+                    <div className="col-12 col-md-8">
                         <label className="form-label text-dark">Local</label>
                         <input
                             name="local"
                             type="text"
                             className="form-control"
-                            value={formCurso.local}
+                            value={formPalestra.local}
                             onChange={handleChange}
                             required
                         />
                     </div>
 
-                    {/* Quantidade de Dias */}
+                    {/* Modalidade */}
                     <div className="col-12 col-md-4">
-                        <label className="form-label text-dark">Quantidade de dias</label>
+                        <label className="form-label text-dark">Modalidade</label>
                         <select
-                            name="quantDias"
+                            name="modalidade"
                             className="form-select"
-                            value={formCurso.quantDias}
-                            onChange={handleQuantDiasChange}
+                            value={formPalestra.modalidade}
+                            onChange={handleChange}
                             required
                         >
                             <option value="" disabled>Selecione</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
+                            <option value="Presencial">Presencial</option>
+                            <option value="Online">Online</option>
                         </select>
                     </div>
 
@@ -396,34 +348,14 @@ const Cursos = () => {
                     <div className="col-12">
                         <label className="form-label text-dark">Descrição</label>
                         <textarea
-                            name="descricao"
+                            name="descri"
                             rows="3"
                             className="form-control"
-                            value={formCurso.descricao}
+                            value={formPalestra.descri}
                             onChange={handleChange}
                             required
                         />
                     </div>
-
-                    {/* Inputs Dinâmicos de Data */}
-                    {formCurso.datas.map((data, index) => (
-                        <div key={index} className="col-12 col-md-4">
-                            <label className="form-label text-dark">
-                                Data do Dia {index + 1}
-                            </label>
-
-                            <input
-                                type="date"
-                                name={`data_${index}`}
-                                min={inicioSemana}
-                                max={fimSemana}
-                                className="form-control"
-                                value={data}
-                                onChange={(e) => handleDataChange(index, e.target.value)}
-                                required
-                            />
-                        </div>
-                    ))}
 
                     <div className="col-12 mt-4 d-flex gap-3">
 
@@ -448,100 +380,72 @@ const Cursos = () => {
                 </div>
             </form>
 
-
             <div className="row mt-5 mb-5 g-4 justify-content-center">
                 <div className="col-12 text-center">
                     <h1 className="fw-bold text-light mb-5">
                         <span className="cor">{'{'}</span>
-                        Minicursos
+                        Palestras
                         <span className="cor">{'}'}</span>
                     </h1>
                 </div>
-
                 <div className="d-flex flex-wrap justify-content-center gap-3 mb-5">
                     <div>
-                        <input type="radio" className="btn-check" id="nivel1" value="Entusiasta" onChange={lidarComFiltro} checked={filtro.nivel === "Entusiasta"} name="nivel" />
-                        <label className="btn rounded-pill px-4" style={estiloBotao("Entusiasta")} htmlFor="nivel1">Entusiasta</label>
+                        <input type="radio" className="btn-check" id="dia1" value="2026-10-26" onChange={lidarComFiltro} checked={filtro.data === "2026-10-26"} name="dia" />
+                        <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-26")} htmlFor="dia1">Segunda-feira</label>
                     </div>
                     <div>
-                        <input type="radio" className="btn-check" id="nivel2" value="Basico" onChange={lidarComFiltro} checked={filtro.nivel === "Basico"} name="nivel" />
-                        <label className="btn rounded-pill px-4" style={estiloBotao("Basico")} htmlFor="nivel2">Básico</label>
+                        <input type="radio" className="btn-check" id="dia2" value="2026-10-27" onChange={lidarComFiltro} checked={filtro.data === "2026-10-27"} name="dia" />
+                        <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-27")} htmlFor="dia2">Terça-feira</label>
                     </div>
                     <div>
-                        <input type="radio" className="btn-check" id="nivel3" value="Medio" onChange={lidarComFiltro} checked={filtro.nivel === "Medio"} name="nivel" />
-                        <label className="btn rounded-pill px-4" style={estiloBotao("Medio")} htmlFor="nivel3">Medio</label>
+                        <input type="radio" className="btn-check" id="dia3" value="2026-10-28" onChange={lidarComFiltro} checked={filtro.data === "2026-10-28"} name="dia" />
+                        <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-28")} htmlFor="dia3">Quarta-feira</label>
                     </div>
                     <div>
-                        <input type="radio" className="btn-check" id="nivel4" value="Avancado" onChange={lidarComFiltro} checked={filtro.nivel === "Avancado"} name="nivel" />
-                        <label className="btn rounded-pill px-4" style={estiloBotao("Avancado")} htmlFor="nivel4">Avançado</label>
+                        <input type="radio" className="btn-check" id="dia4" value="2026-10-29" onChange={lidarComFiltro} checked={filtro.data === "2026-10-29"} name="dia" />
+                        <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-29")} htmlFor="dia4">Quinta-feira</label>
+                    </div>
+                    <div>
+                        <input type="radio" className="btn-check" id="dia5" value="2026-10-30" onChange={lidarComFiltro} checked={filtro.data === "2026-10-30"} name="dia" />
+                        <label className="btn rounded-pill px-4" style={estiloBotao("2026-10-30")} htmlFor="dia5">Sexta-feira</label>
                     </div>
                 </div>
 
                 {
-                    Array.isArray(curso) && curso.length > 0 ? (
+                    Array.isArray(palestra) && palestra.length > 0 ? (
 
-                        curso.map((i) => (
+                        palestra.map((i) => (
 
-                            <div className='col-12 col-md-4 col-lg-3 mb-4' key={i.id}>
-                                <div className="card h-100 shadow-sm" style={{ border: '3px solid var(--cor8)', borderRadius: '15px', overflow: 'hidden', backgroundColor: '#1e1e1e' }}>
+                            <div className='col-12 col-md-6 col-lg-4' key={i.id} >
+                                <div className="card bg-dark text-light h-100  p-3" style={{ border: '3px solid var(--cor8)' }}>
 
-                                    <div className="card-body p-3 text-light">
-
-                                        <img
-                                            src={"/FotosEquipe/" + i.foto}
-                                            alt={i.nome}
-                                            className='img-fluid rounded mb-3'
-                                            style={{ width: '100%', height: '400px', objectFit: 'cover', display: 'block' }}
-                                        />
-
-                                        <h4 className='card-title fw-bold text-center'>{i.nome}</h4>
-                                        <p className='card-text text-secondary text-center small'>{i.descri}</p>
-
-                                        <ul className='list-group list-group-flush mt-3 px-0'>
-                                            <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
-                                                <strong>Ministrantes:</strong> {i.ministrantes}
-                                            </li>
-                                            <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
-                                                <strong>Carga horária:</strong> {i.cargahoraria}
-                                            </li>
-                                            <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
-                                                <strong>Vagas:</strong> {i.vagas == 0 ? 'Ilimitado' : i.vagas}
-                                            </li>
-                                            <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
-                                                <strong>Tipo:</strong> {i.tipo}
-                                            </li>
-                                            {i.datas_crono && i.datas_crono.length > 0 && (
-                                                <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
-                                                    <strong>Datas:</strong>
-                                                    {/* Sub-lista sem bordas */}
-                                                    <ul className="list-unstyled mb-0 mt-1 ps-2">
-                                                        {i.datas_crono.map((crono) => (
-                                                            <li key={crono.id}>
-                                                                - {new Date(crono.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
-                                                            </li>
-                                                        ))}
-                                                    </ul>
-                                                </li>
-                                            )}
-                                        </ul>
-
-                                        <button onClick={() => excluirCurso(i.id)}>
-                                            Excluir
-                                        </button>
+                                    <div className="card-body" id={i.id} >
+                                        <img src={"/FotosPalestras/" + i.foto} alt={i.foto} className='img-fluid w-100' style={{ height: '500px', objectFit: 'cover' }} />
+                                        <h4 className='card-title mt-3'>{i.nome}</h4>
+                                        <h6 className='card-text'>{i.palestrante}, {i.status}</h6>
+                                        <p className='card-text'>{i.descri}</p>
                                     </div>
+                                    <ul className='list-group list-group-flush bg-transparent'>
+                                        <li className='list-group-item bg-transparent text-light'>Área: {i.tema}</li>
+                                        <li className='list-group-item bg-transparent text-light'>Data: {i.data ? new Date(i.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) : "Não informada"}</li>
+                                        <li className='list-group-item bg-transparent text-light'>Hora: {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : "Não informada"}</li>
+                                        <li className='list-group-item bg-transparent text-light'>Local: {i.local}</li>
+                                        <li className='list-group-item bg-transparent text-light'>Modalidade: {i.modalidade}</li>
+                                    </ul>
+                                    <button onClick={() => excluirPalestra(i.id)}>
+                                        Excluir
+                                    </button>
 
                                 </div>
                             </div>
-
                         ))
                     ) : (
-                        <p className='text-light'>Nenhuma curso encontrada.</p>
+                        <p className='text-light'>Nenhuma palestra encontrada.</p>
                     )
                 }
-
             </div>
         </div>
     );
 };
 
-export default Cursos;
+export default Palestras;
