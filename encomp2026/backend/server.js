@@ -337,6 +337,7 @@ app.post('/cadastroCurso', verificarAdmin, upload.single('foto'), async (req, re
     nivel,
     quantDias,
     local,
+    linkInscricao,
     datas
   } = req.body;
   const datasArray = typeof datas === 'string' ? JSON.parse(datas) : datas;
@@ -352,6 +353,7 @@ app.post('/cadastroCurso', verificarAdmin, upload.single('foto'), async (req, re
         nivel,
         quantDias: Number(quantDias),
         local,
+        linkInscricao,
         foto: req.file ? req.file.filename : null
       }
     });

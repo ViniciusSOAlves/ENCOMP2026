@@ -263,16 +263,16 @@ header img#fundo {
 
 .imagem-curso {
   width: 100%;
-  height: 400px;
-  object-fit: contain;
+  height: 250px;  
+  object-fit: cover; 
   display: block;
   background-color: #1e1e1e;
 }
 
 .imagem-palestra {
   width: 100%;
-  height: 300px; /* Precisa de uma altura fixa de novo */
-  object-fit: contain; /* <-- Volta para o contain */
+  height: 300px; 
+  object-fit: contain; 
   display: block;
   background-color: #1e1e1e;
 }

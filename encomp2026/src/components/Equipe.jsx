@@ -15,7 +15,7 @@ const Equipe = () => {
             {/* CONTEÚDO */}
             <div className="row justify-content-center">
                 <div className="col-12 text-center">
-                    <img src="/FotosEquipe/equipe.jpeg" className="img-fluid w-100 rounded shadow" style={{ maxWidth: '1100px' }} alt="fotoEquipe" />
+                    <img src="/FotosEquipe/equipe.png" className="img-fluid w-100 rounded shadow" style={{ maxWidth: '1100px' }} alt="fotoEquipe" />
                 </div>
             </div>
         </div>

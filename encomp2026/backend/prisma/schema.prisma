@@ -8,20 +8,21 @@ datasource db {
 }
 
 model cursos {
-  id           Int          @id @default(autoincrement())
-  nome         String?      @db.VarChar(255)
-  foto         String?      @db.VarChar(255)
-  ministrantes String?      @db.VarChar(255)
-  cargahoraria Int?         @db.UnsignedTinyInt
-  vagas        Int?         @db.UnsignedTinyInt
-  descri       String?      @db.Text
-  tipo         String?      @db.VarChar(20)
-  nivel        String       @db.VarChar(50)
-  quantDias    Int?         @db.UnsignedTinyInt
-  local        String?      @db.VarChar(50)
+  id            Int          @id @default(autoincrement())
+  nome          String?      @db.VarChar(255)
+  foto          String?      @db.VarChar(255)
+  ministrantes  String?      @db.VarChar(255)
+  cargahoraria  Int?         @db.UnsignedTinyInt
+  vagas         Int?         @db.UnsignedTinyInt
+  descri        String?      @db.Text
+  tipo          String?      @db.VarChar(20)
+  nivel         String       @db.VarChar(50)
+  quantDias     Int?         @db.UnsignedTinyInt
+  local         String?      @db.VarChar(50)
+  linkInscricao String?      @db.VarChar(255) 
 
   // Relação inversa: 1 curso pode ter várias datas no cronograma
-  datas_crono  data_crono[]
+  datas_crono   data_crono[]
 }
 
 model palestra {

@@ -35,7 +35,7 @@ const Curso = () => {
 
   return (
     <div className="container py-5">
-      
+
       {/* TÍTULO */}
       <div className="row">
         <div className="col-12 text-center mb-5">
@@ -49,11 +49,11 @@ const Curso = () => {
       <div className="row">
         <div className="col-12 mb-5">
           <div className="d-flex flex-wrap justify-content-center gap-2 gap-md-3">
-            {["Entusiasta", "Basico", "Medio", "Avancado"].map((nivelItem) => (
+            {["Entusiasta", "Basico", "Intermediario", "Avancado"].map((nivelItem) => (
               <div key={nivelItem}>
                 <input type="radio" className="btn-check" id={`nivel_${nivelItem}`} value={nivelItem} onChange={lidarComFiltro} checked={filtro.nivel === nivelItem} name="nivel" />
                 <label className="btn rounded-pill px-3 px-md-4" style={estiloBotao(nivelItem)} htmlFor={`nivel_${nivelItem}`}>
-                  {nivelItem === "Basico" ? "Básico" : nivelItem === "Medio" ? "Médio" : nivelItem === "Avancado" ? "Avançado" : nivelItem}
+                  {nivelItem === "Basico" ? "Básico" : nivelItem === "Intermediario" ? "Intermediário" : nivelItem === "Avancado" ? "Avançado" : nivelItem}
                 </label>
               </div>
             ))}
@@ -71,7 +71,7 @@ const Curso = () => {
                   <img src={"/FotosEquipe/" + i.foto} alt={i.nome} className="img-fluid rounded mb-3 w-100 imagem-curso" />
                   <h4 className="card-title fw-bold text-center">{i.nome}</h4>
                   <p className="card-text text-secondary text-center small">{i.descri}</p>
-                  
+
                   <ul className="list-group list-group-flush mt-3 px-0">
                     <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
                       <strong style={{ color: 'var(--cor6)' }}>Ministrantes:</strong> {i.ministrantes}
@@ -96,7 +96,23 @@ const Curso = () => {
                       </li>
                     )}
                   </ul>
+                  <div className="mt-4">
+
+                    {i.linkInscricao && (
+                      <a
+                        href={i.linkInscricao?.startsWith('http') ? i.linkInscricao : `https://${i.linkInscricao}`}
+                        className="btn w-100 fw-bold"
+                        style={{color: 'var(--cor5)'}}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Inscrever-se
+                      </a>
+                    )}
+
+                  </div>
                 </div>
+
               </div>
             </div>
           ))

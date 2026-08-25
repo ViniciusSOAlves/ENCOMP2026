@@ -306,8 +306,8 @@ const Palestras = () => {
                         <input
                             name="data"
                             type="date"
-                            min={inicioSemana}
-                            max={fimSemana}
+                            min="2026-10-26"
+                            max="2026-10-30"
                             className="form-control"
                             value={formPalestra.data}
                             onChange={handleChange}

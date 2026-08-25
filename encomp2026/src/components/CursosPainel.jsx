@@ -20,11 +20,9 @@ const Cursos = () => {
         nivel: '',
         quantDias: '',
         local: '',
+        linkInscricao: '',
         datas: []
     });
-
-    const inicioSemana = "2026-10-26";
-    const fimSemana = "2026-10-30";
 
     const handleChange = (e) => {
         setFormCurso({ ...formCurso, [e.target.name]: e.target.value });
@@ -67,6 +65,7 @@ const Cursos = () => {
             nivel: formCurso.nivel,
             quantDias: formCurso.quantDias,
             local: formCurso.local,
+            linkInscricao: formCurso.linkInscricao,
             datas: JSON.stringify(formCurso.datas)
         };
 
@@ -101,6 +100,7 @@ const Cursos = () => {
                     nivel: '',
                     quantDias: '',
                     local: '',
+                    linkInscricao: '',
                     datas: []
                 });
 
@@ -317,7 +317,7 @@ const Cursos = () => {
 
                     {/* Número de Vagas */}
                     <div className="col-12 col-md-4">
-                        <label className="form-label text-dark">Número de Vagas</label>
+                        <label className="form-label text-dark">Número de Vagas *(0 para Ilimitado)</label>
                         <input
                             name="vagas"
                             type="number"
@@ -357,7 +357,7 @@ const Cursos = () => {
                             <option value="" disabled>Selecione</option>
                             <option value="Entusiasta">Entusiasta</option>
                             <option value="Basico">Básico</option>
-                            <option value="Medio">Médio</option>
+                            <option value="Intermediario">Intermediário</option>
                             <option value="Avancado">Avançado</option>
                         </select>
                     </div>
@@ -405,6 +405,19 @@ const Cursos = () => {
                         />
                     </div>
 
+                    {/* LINK de INSCRICAO*/}
+                    <div className="col-12 col-md-6">
+                        <label className="form-label text-dark">Link de Inscrição</label>
+                        <input
+                            name="linkInscricao"
+                            type="text"
+                            className="form-control"
+                            value={formCurso.linkInscricao}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
                     {/* Inputs Dinâmicos de Data */}
                     {formCurso.datas.map((data, index) => (
                         <div key={index} className="col-12 col-md-4">
@@ -415,14 +428,16 @@ const Cursos = () => {
                             <input
                                 type="date"
                                 name={`data_${index}`}
-                                min={inicioSemana}
-                                max={fimSemana}
+                                min="2026-10-26"
+                                max="2026-10-30"
                                 className="form-control"
                                 value={data}
                                 onChange={(e) => handleDataChange(index, e.target.value)}
                                 required
                             />
                         </div>
+
+                        
                     ))}
 
                     <div className="col-12 mt-4 d-flex gap-3">
@@ -468,8 +483,8 @@ const Cursos = () => {
                         <label className="btn rounded-pill px-4" style={estiloBotao("Basico")} htmlFor="nivel2">Básico</label>
                     </div>
                     <div>
-                        <input type="radio" className="btn-check" id="nivel3" value="Medio" onChange={lidarComFiltro} checked={filtro.nivel === "Medio"} name="nivel" />
-                        <label className="btn rounded-pill px-4" style={estiloBotao("Medio")} htmlFor="nivel3">Medio</label>
+                        <input type="radio" className="btn-check" id="nivel3" value="Intermediario" onChange={lidarComFiltro} checked={filtro.nivel === "Intermediario"} name="nivel" />
+                        <label className="btn rounded-pill px-4" style={estiloBotao("Intermediario")} htmlFor="nivel3">Intermediário</label>
                     </div>
                     <div>
                         <input type="radio" className="btn-check" id="nivel4" value="Avancado" onChange={lidarComFiltro} checked={filtro.nivel === "Avancado"} name="nivel" />
