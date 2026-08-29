@@ -215,7 +215,7 @@ app.post("/Cronograma", async (req, res) => {
 
     const cursosFormatados = cursosRaw.map((dc) => ({
       horario: dc.HoraIni || dc.data,
-      atividade: dc.curso?.nome || 'Atividade sem nome',
+      atividade: `Curso: ${dc.curso?.nome || 'Atividade sem nome'}`,
       LocalLink: dc.curso?.local || 'Não informado',
       formato: dc.curso?.tipo || 'Presencial'
     }));
@@ -228,7 +228,7 @@ app.post("/Cronograma", async (req, res) => {
 
     const palestrasFormatadas = palestrasRaw.map((p) => ({
       horario: p.horario || p.data,
-      atividade: p.nome || 'Palestra sem nome',
+      atividade: `Palestra: ${p.nome || 'Palestra sem nome'}`,
       LocalLink: p.local || 'Não informado',
       formato: p.modalidade || 'Presencial'
     }));
@@ -332,7 +332,6 @@ app.post('/cadastroCurso', verificarAdmin, upload.single('foto'), async (req, re
     ministrantes,
     cargaHoraria,
     vagas,
-    descricao,
     tipo,
     nivel,
     quantDias,
@@ -348,7 +347,6 @@ app.post('/cadastroCurso', verificarAdmin, upload.single('foto'), async (req, re
         ministrantes,
         cargahoraria: Number(cargaHoraria),
         vagas: Number(vagas),
-        descri: descricao,
         tipo,
         nivel,
         quantDias: Number(quantDias),
@@ -391,7 +389,7 @@ app.post('/cadastroCurso', verificarAdmin, upload.single('foto'), async (req, re
 
 });
 
-app.post('/cadastraPalestra', verificarAdmin,uploadPalestra.single('foto'), async (req, res) => {
+app.post('/cadastraPalestra', verificarAdmin, uploadPalestra.single('foto'), async (req, res) => {
   const {
     nome,
     palestrante,
@@ -399,6 +397,7 @@ app.post('/cadastraPalestra', verificarAdmin,uploadPalestra.single('foto'), asyn
     tema,
     descri,
     data,
+    hora,
     local,
     modalidade
   } = req.body;
@@ -413,7 +412,7 @@ app.post('/cadastraPalestra', verificarAdmin,uploadPalestra.single('foto'), asyn
         tema,
         descri,
         data: new Date(`${data}T00:00:00Z`),
-        horario: new Date('1970-01-01T10:30:00-03:00'),
+        horario: new Date(`1970-01-01T${hora}:00Z`),
         local,
         modalidade
       }

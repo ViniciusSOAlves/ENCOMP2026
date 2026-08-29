@@ -192,8 +192,13 @@ function App() {
 
               <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style={{ color: 'var(--cor5)' }}>
                 <h6 className="text-uppercase fw-bold mb-4 text-light">Redes Sociais</h6>
-                <p><i className="bi bi-instagram"></i></p>
-                <p><i className="bi bi-whatsapp"></i></p>
+                <a href="https://www.instagram.com/encomp.ifpassos?igsi=djVnMW84dnJqenps" target="_blank" rel="noopener noreferrer">
+                  <p><i className="bi bi-instagram"></i></p>
+                </a>
+
+                <a href="https://chat.whatsapp.com/CVkrfWTkgOT5dHtwCQRnPC" target="_blank" rel="noopener noreferrer">
+                  <p><i className="bi bi-whatsapp"></i></p>
+                </a>
               </div>
 
               <div className="col-md-3 col-lg-2 col-xl-3 mx-auto mb-4">
@@ -201,7 +206,7 @@ function App() {
                 <p>IFSULDEMINAS - Campus Passos</p>
                 <p>Rua da Penha, 290 - Penha II</p>
                 <p>Passos - MG, 37903-070</p>
-                <p>janaina.leite@ifsuldeminas.edu.br</p>
+                <p>encompifpassos@gmail.com</p>
                 <p>(35) 3526-4856</p>
               </div>
 

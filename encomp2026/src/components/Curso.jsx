@@ -70,7 +70,6 @@ const Curso = () => {
                 <div className="card-body p-3 text-light">
                   <img src={"/FotosEquipe/" + i.foto} alt={i.nome} className="img-fluid rounded mb-3 w-100 imagem-curso" />
                   <h4 className="card-title fw-bold text-center">{i.nome}</h4>
-                  <p className="card-text text-secondary text-center small">{i.descri}</p>
 
                   <ul className="list-group list-group-flush mt-3 px-0">
                     <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
@@ -86,11 +85,25 @@ const Curso = () => {
                       <strong style={{ color: 'var(--cor6)' }}>Tipo:</strong> {i.tipo}
                     </li>
                     {i.datas_crono && i.datas_crono.length > 0 && (
-                      <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2 border-bottom-0 mb-0">
-                        <strong style={{ color: 'var(--cor6)' }}>Datas:</strong>
+                      <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
+                        <strong>Datas:</strong>
+
                         <ul className="list-unstyled mb-0 mt-1 ps-2">
                           {i.datas_crono.map((crono) => (
-                            <li key={crono.id}>- {new Date(crono.data).toLocaleDateString("pt-BR", { timeZone: "UTC" })}</li>
+                            <li key={crono.id}>
+                              • {new Date(crono.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
+                              <span className="ms-2 text-secondary">
+                                ({new Date(crono.HoraIni).toLocaleTimeString('pt-BR', {
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                  timeZone: 'UTC'
+                                })} - {new Date(crono.HoraFim).toLocaleTimeString('pt-BR', {
+                                  hour: '2-digit',
+                                  minute: '2-digit',
+                                  timeZone: 'UTC'
+                                })})
+                              </span>
+                            </li>
                           ))}
                         </ul>
                       </li>
@@ -102,7 +115,7 @@ const Curso = () => {
                       <a
                         href={i.linkInscricao?.startsWith('http') ? i.linkInscricao : `https://${i.linkInscricao}`}
                         className="btn w-100 fw-bold"
-                        style={{color: 'var(--cor5)'}}
+                        style={{ color: 'var(--cor5)' }}
                         target="_blank"
                         rel="noopener noreferrer"
                       >

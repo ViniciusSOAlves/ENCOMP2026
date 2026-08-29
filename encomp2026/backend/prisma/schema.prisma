@@ -14,7 +14,6 @@ model cursos {
   ministrantes  String?      @db.VarChar(255)
   cargahoraria  Int?         @db.UnsignedTinyInt
   vagas         Int?         @db.UnsignedTinyInt
-  descri        String?      @db.Text
   tipo          String?      @db.VarChar(20)
   nivel         String       @db.VarChar(50)
   quantDias     Int?         @db.UnsignedTinyInt

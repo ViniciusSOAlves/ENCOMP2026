@@ -17,6 +17,7 @@ const Palestras = () => {
         tema: '',
         descri: '',
         data: '',
+        hora: '',
         local: '',
         modalidade: ''
     });
@@ -38,6 +39,7 @@ const Palestras = () => {
             tema: formPalestra.tema,
             descri: formPalestra.descri,
             data: formPalestra.data,
+            hora: formPalestra.hora,
             local: formPalestra.local,
             modalidade: formPalestra.modalidade
         };
@@ -71,6 +73,7 @@ const Palestras = () => {
                     tema: '',
                     descri: '',
                     data: '',
+                    hora: '',
                     local: '',
                     modalidade: ''
                 });
@@ -315,6 +318,19 @@ const Palestras = () => {
                         />
                     </div>
 
+                    {/* Hora */}
+                    <div className="col-12 col-md-4">
+                        <label className="form-label text-dark">Hora</label>
+                        <input
+                            name="hora"
+                            type="time"
+                            className="form-control"
+                            value={formPalestra.hora}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+
                     {/* Local */}
                     <div className="col-12 col-md-8">
                         <label className="form-label text-dark">Local</label>
@@ -428,7 +444,13 @@ const Palestras = () => {
                                     <ul className='list-group list-group-flush bg-transparent'>
                                         <li className='list-group-item bg-transparent text-light'>Área: {i.tema}</li>
                                         <li className='list-group-item bg-transparent text-light'>Data: {i.data ? new Date(i.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) : "Não informada"}</li>
-                                        <li className='list-group-item bg-transparent text-light'>Hora: {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : "Não informada"}</li>
+                                        <li className='list-group-item bg-transparent text-light'>
+                                            Hora: {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', {
+                                                hour: '2-digit',
+                                                minute: '2-digit',
+                                                timeZone: 'UTC'
+                                            }) : "Não informada"}
+                                        </li>
                                         <li className='list-group-item bg-transparent text-light'>Local: {i.local}</li>
                                         <li className='list-group-item bg-transparent text-light'>Modalidade: {i.modalidade}</li>
                                     </ul>

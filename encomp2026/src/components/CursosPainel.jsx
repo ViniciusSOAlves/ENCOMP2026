@@ -15,7 +15,6 @@ const Cursos = () => {
         ministrantes: '',
         cargaHoraria: '',
         vagas: '',
-        descricao: '',
         tipo: '',
         nivel: '',
         quantDias: '',
@@ -60,7 +59,6 @@ const Cursos = () => {
             ministrantes: formCurso.ministrantes,
             cargaHoraria: formCurso.cargaHoraria,
             vagas: formCurso.vagas,
-            descricao: formCurso.descricao,
             tipo: formCurso.tipo,
             nivel: formCurso.nivel,
             quantDias: formCurso.quantDias,
@@ -95,7 +93,6 @@ const Cursos = () => {
                     ministrantes: '',
                     cargaHoraria: '',
                     vagas: '',
-                    descricao: '',
                     tipo: '',
                     nivel: '',
                     quantDias: '',
@@ -392,19 +389,6 @@ const Cursos = () => {
                         </select>
                     </div>
 
-                    {/* Descrição */}
-                    <div className="col-12">
-                        <label className="form-label text-dark">Descrição</label>
-                        <textarea
-                            name="descricao"
-                            rows="3"
-                            className="form-control"
-                            value={formCurso.descricao}
-                            onChange={handleChange}
-                            required
-                        />
-                    </div>
-
                     {/* LINK de INSCRICAO*/}
                     <div className="col-12 col-md-6">
                         <label className="form-label text-dark">Link de Inscrição</label>
@@ -437,7 +421,7 @@ const Cursos = () => {
                             />
                         </div>
 
-                        
+
                     ))}
 
                     <div className="col-12 mt-4 d-flex gap-3">
@@ -510,7 +494,6 @@ const Cursos = () => {
                                         />
 
                                         <h4 className='card-title fw-bold text-center'>{i.nome}</h4>
-                                        <p className='card-text text-secondary text-center small'>{i.descri}</p>
 
                                         <ul className='list-group list-group-flush mt-3 px-0'>
                                             <li className='list-group-item bg-transparent text-light border-secondary px-0 py-2'>
@@ -528,11 +511,22 @@ const Cursos = () => {
                                             {i.datas_crono && i.datas_crono.length > 0 && (
                                                 <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
                                                     <strong>Datas:</strong>
-                                                    {/* Sub-lista sem bordas */}
+
                                                     <ul className="list-unstyled mb-0 mt-1 ps-2">
                                                         {i.datas_crono.map((crono) => (
                                                             <li key={crono.id}>
-                                                                - {new Date(crono.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
+                                                                • {new Date(crono.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' })}
+                                                                <span className="ms-2 text-secondary">
+                                                                    ({new Date(crono.HoraIni).toLocaleTimeString('pt-BR', {
+                                                                        hour: '2-digit',
+                                                                        minute: '2-digit',
+                                                                        timeZone: 'UTC'
+                                                                    })} - {new Date(crono.HoraFim).toLocaleTimeString('pt-BR', {
+                                                                        hour: '2-digit',
+                                                                        minute: '2-digit',
+                                                                        timeZone: 'UTC'
+                                                                    })})
+                                                                </span>
                                                             </li>
                                                         ))}
                                                     </ul>

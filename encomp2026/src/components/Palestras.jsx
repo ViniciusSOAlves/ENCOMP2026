@@ -84,7 +84,11 @@ const Palestras = () => {
                       <strong style={{ color: 'var(--cor6)' }}>Data:</strong> {i.data ? new Date(i.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) : "Não informada"}
                     </li>
                     <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
-                      <strong style={{ color: 'var(--cor6)' }}>Hora:</strong> {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : "Não informada"}
+                      <strong style={{ color: 'var(--cor6)' }}>Hora:</strong> {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', {
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        timeZone: 'UTC'
+                      }) : "Não informada"}
                     </li>
                     <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
                       <strong style={{ color: 'var(--cor6)' }}>Local:</strong> {i.local}
