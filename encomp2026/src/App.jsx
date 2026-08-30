@@ -152,7 +152,7 @@ function App() {
         </div>
 
 
-        <hr className="mx-auto" style={{ borderColor: 'var(--cor6)', opacity: 1, borderWidth: '1px', width: '95%' }} />
+        <hr className="mx-auto" style={{ borderColor: 'var(--cor6)', opacity: 1, borderWidth: 'px', width: '95%' }} />
         <SobreIF />
 
         <hr className="mx-auto" style={{ borderColor: 'var(--cor6)', opacity: 1, borderWidth: '1px', width: '95%' }} />
@@ -197,7 +197,7 @@ function App() {
                 </a>
 
                 <a href="https://chat.whatsapp.com/CVkrfWTkgOT5dHtwCQRnPC" target="_blank" rel="noopener noreferrer">
-                  <p><i className="bi bi-whatsapp"></i></p>
+                  <p><i className="bi bi-whatsapp" style={{cor: "var(--cor5)"}}></i></p>
                 </a>
               </div>
 

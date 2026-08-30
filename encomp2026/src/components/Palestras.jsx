@@ -68,35 +68,70 @@ const Palestras = () => {
       <div className="row g-4 justify-content-center">
         {Array.isArray(palestra) && palestra.length > 0 ? (
           palestra.map((i) => (
-            <div className="col-12 col-md-6 col-lg-4" key={i.id}>
-              <div className="card h-100 shadow-sm" style={{ border: "3px solid var(--cor8)", borderRadius: "15px", overflow: "hidden", backgroundColor: "#1e1e1e" }}>
-                <div className="card-body p-3 text-light" id={i.id}>
-                  <img src={"/FotosPalestras/" + i.foto} alt={i.foto} className='img-fluid rounded mb-3 w-100 imagem-palestra' />
-                  <h4 className="card-title fw-bold text-center">{i.nome}</h4>
-                  <p className="card-text text-center text-muted small mb-2">{i.palestrante} • {i.status}</p>
-                  <p className="card-text  text-center small mb-3">{i.descri}</p>
+            <div className="col-12 col-sm-6 col-lg-3" key={i.id}>
+              {/* CARD PRINCIPAL MAIS COMPACTO */}
+              <div className="card h-100 shadow-sm border-0" style={{ backgroundColor: "#1e1e1e", borderRadius: "10px", overflow: "hidden" }}>
+                
+                <div className="card-body p-3 text-light d-flex flex-column align-items-center text-center" id={i.id}>
+                  
+                  {/* FOTO REDONDA MENOR (100px) */}
+                  <div className="mb-2">
+                    <img 
+                      src={"/FotosPalestras/" + i.foto} 
+                      alt={i.palestrante} 
+                      style={{
+                        width: '100px',
+                        height: '100px',
+                        objectFit: 'cover',
+                        borderRadius: '50%',
+                        border: '2px solid var(--cor8)',
+                        backgroundColor: '#1e1e1e',
+                        boxShadow: '0 4px 8px rgba(0,0,0,0.4)'
+                      }} 
+                    />
+                  </div>
 
-                  <ul className="list-group list-group-flush mt-auto px-0">
-                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
-                      <strong style={{ color: 'var(--cor6)' }}>Área:</strong> {i.tema}
-                    </li>
-                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
-                      <strong style={{ color: 'var(--cor6)' }}>Data:</strong> {i.data ? new Date(i.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) : "Não informada"}
-                    </li>
-                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
-                      <strong style={{ color: 'var(--cor6)' }}>Hora:</strong> {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', {
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        timeZone: 'UTC'
-                      }) : "Não informada"}
-                    </li>
-                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2">
-                      <strong style={{ color: 'var(--cor6)' }}>Local:</strong> {i.local}
-                    </li>
-                    <li className="list-group-item bg-transparent text-light border-secondary px-0 py-2 mb-0 border-bottom-0">
-                      <strong style={{ color: 'var(--cor6)' }}>Modalidade:</strong> {i.modalidade}
-                    </li>
-                  </ul>
+                  {/* NOME DO PALESTRANTE */}
+                  <h6 className="fw-bold mb-1" style={{ color: 'var(--cor6)', fontSize: '1rem' }}>
+                    {i.palestrante}
+                  </h6>
+                  
+                  {/* STATUS / TIPO */}
+                  <p className="small mb-2" style={{ color: '#999999', fontSize: '0.8rem' }}>
+                    {i.status}
+                  </p>
+
+                  {/* BADGE (Tema/Área) */}
+                  <span className="badge rounded-pill mb-3 px-3 py-1 w-100 text-truncate" style={{ backgroundColor: 'var(--cor8)', color: '#ffffff', fontWeight: '500', fontSize: '0.75rem' }}>
+                    {i.tema}
+                  </span>
+
+                  {/* TÍTULO DA PALESTRA */}
+                  <p className="fw-bold mb-1 text-light" style={{ fontSize: '0.9rem' }}>
+                    {i.nome}
+                  </p>
+
+                  {/* DESCRIÇÃO CURTA */}
+                  <p className="small mb-3 flex-grow-1" style={{ color: '#cccccc', fontSize: '0.8rem', lineHeight: '1.3' }}>
+                    {i.descri}
+                  </p>
+
+                  {/* LINHA SEPARADORA */}
+                  <hr className="w-100 border-secondary opacity-25 my-2" />
+
+                  {/* DATA, HORA E LOCAL */}
+                  <div className="w-100 mt-auto">
+                    <p className="mb-1 fw-bold" style={{ color: 'var(--cor6)', fontSize: '0.85rem' }}>
+                      {i.data ? new Date(i.data).toLocaleDateString('pt-BR', { timeZone: 'UTC' }) : "Não informada"}
+                    </p>
+                    <p className="mb-1 text-light" style={{ fontSize: '0.8rem' }}>
+                      Início: {i.horario ? new Date(i.horario).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'UTC' }) : "Não informada"}
+                    </p>
+                    <p className="mb-0 text-muted" style={{ fontSize: '0.75rem' }}>
+                      {i.modalidade} ({i.local})
+                    </p>
+                  </div>
+
                 </div>
               </div>
             </div>
