@@ -102,7 +102,7 @@ const Curso = () => {
 
                   {/* CARGA HORÁRIA E VAGAS */}
                   <p className="small fw-bold mb-4" style={{ color: 'var(--cor6)', fontSize: '0.85rem' }}>
-                    Carga: {i.cargahoraria} <span className="mx-1" style={{ color: '#666666' }}>•</span> Vagas: {i.vagas == 0 ? 'Ilimitado' : i.vagas}
+                    Carga: {i.cargahoraria}h <span className="mx-1" style={{ color: '#666666' }}>•</span> Vagas: {i.vagas == 0 ? 'Ilimitado' : i.vagas}
                   </p>
 
                   {/* DIAS DA SEMANA E HORÁRIOS RESTAURADOS */}

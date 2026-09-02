@@ -145,7 +145,7 @@ function App() {
                 Ao longo dos anos, o evento cresceu e se consolidou como uma das principais conferências de tecnologia da região, atraindo participantes de diversas instituições e profissionais renomados do setor.
               </p>
               <p style={{ textAlign: 'justify' }}>
-                Para 2026, o ENCOMP chega à sua 12ª edição com uma programação especial, trazendo temas inovadores como Inteligência Artificial, Cloud Computing, Edição de Vídeo e muito mais.
+                Para 2026, o ENCOMP chega à sua 12ª edição com uma programação especial, trazendo temas inovadores como Inteligência Artificial, Modelagem 3D, Ciência de Dados e muito mais.
               </p>
             </div>
           </div>
@@ -186,19 +186,36 @@ function App() {
                   <i className="fas fa-gem"></i> ENCOMP 2026
                 </h6>
                 <p>
-                  O maior evento de computação do Sul de Minas Gerais. Palestras, minicursos, campeonato de League of Legends e muito mais!
+                  O maior evento de computação do Sul de Minas Gerais. Palestras, minicursos e muito mais!
                 </p>
               </div>
 
-              <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4" style={{ color: 'var(--cor5)' }}>
-                <h6 className="text-uppercase fw-bold mb-4 text-light">Redes Sociais</h6>
-                <a href="https://www.instagram.com/encomp.ifpassos?igsi=djVnMW84dnJqenps" target="_blank" rel="noopener noreferrer">
-                  <p><i className="bi bi-instagram"></i></p>
-                </a>
+              <div
+                className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4"
+                style={{ color: 'var(--cor5)' }}>
 
-                <a href="https://chat.whatsapp.com/CVkrfWTkgOT5dHtwCQRnPC" target="_blank" rel="noopener noreferrer">
-                  <p><i className="bi bi-whatsapp" style={{cor: "var(--cor5)"}}></i></p>
-                </a>
+                <h6 className="text-uppercase fw-bold mb-4 text-light">
+                  Redes Sociais
+                </h6>
+
+               <div className="d-flex justify-content-center justify-content-md-start gap-3">
+                  <a
+                    href="https://www.instagram.com/encomp.ifpassos?igsi=djVnMW84dnJqenps"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--cor5)' }}>
+
+                    <i className="bi bi-instagram"></i>
+                  </a>
+
+                  <a
+                    href="https://chat.whatsapp.com/CVkrfWTkgOT5dHtwCQRnPC"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--cor5)' }} >
+                    <i className="bi bi-whatsapp"></i>
+                  </a>
+                </div>
               </div>
 
               <div className="col-md-3 col-lg-2 col-xl-3 mx-auto mb-4">
@@ -221,7 +238,7 @@ function App() {
             onClick={acessarLogin}
             style={{ cursor: "default" }}
           >
-            5°/6° período
+            6° período
           </span>
         </div>
       </footer>

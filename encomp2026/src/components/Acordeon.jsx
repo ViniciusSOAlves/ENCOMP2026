@@ -1,11 +1,11 @@
 import React from 'react'
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
 const Acordeon = () => {
     return (
         <div className="container py-5">
-            {/* TÍTULO */}
             <div className="row">
                 <div className="col-12 text-center mb-5">
                     <h1 className="fw-bold text-light m-0">
@@ -14,7 +14,6 @@ const Acordeon = () => {
                 </div>
             </div>
 
-            {/* CONTEÚDO */}
             <div className="row justify-content-center">
                 <div className="col-12 col-md-10 col-lg-8">
                     <div className="accordion bg-dark" id="acordeonEncomp">
@@ -22,14 +21,13 @@ const Acordeon = () => {
                             #acordeonEncomp .accordion-button::after { filter: invert(1) brightness(2); }
                         `}</style>
 
-                        {/* Itens do Acordeon */}
                         <div className="accordion-item bg-dark text-light" style={{ borderColor: 'var(--cor5)' }}>
                             <h2 className="accordion-header" id="headingOne">
-                                <button className="accordion-button bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                <button className="accordion-button collapsed bg-dark text-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                                     O que é o ENCOMP?
                                 </button>
                             </h2>
-                            <div id="collapseOne" className="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#acordeonEncomp">
+                            <div id="collapseOne" className="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#acordeonEncomp">
                                 <div className="accordion-body">
                                     <p>É um evento gratuito focado em computação com palestras, cursos, convidados e muito mais. O ENCOMP reúne estudantes, profissionais e entusiastas da área de tecnologia para compartilhar conhecimentos e experiências.</p>
                                 </div>
@@ -100,6 +98,7 @@ const Acordeon = () => {
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
