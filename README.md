@@ -1,13 +1,17 @@
 # Passo a passo para execução do site
 
 ## Pré requisitos para funcionar: ter o NodeJS instalado em seu computador e um servidor MySQL(recomenda-se o WampServer, o mesmo que foi utilizado para o desenvolvimento).
-
+### O banco de dados está na pasta em geral com o nome de encomp2026.sql para importação!!!!!!!!!!!!!!!!!!!!!!!!!
 Após a clonagem da pasta rodar o comando abaixo, tanto na pasta 'backend' e na pasta principal do projeto:
   ```npm i``` 
 
 Criar um arquivo .env para a conexão com o banco de dados, com uma variável chamada DATABASE_URL.
 Exemplo: 
 ```DATABASE_URL = mysql://root:@localhost:3306/encomp2026```
+
+No .env, também colocar uma variável SESSION_SECRET com valor que pode ser aleatório, "batendo a cabeça no teclado" por exemplo.
+Exemplo:
+```SESSION_SECRET=dkfaksjidhnfkujasdkjfakjsdfsdasdasdasdas```
 
 Na pasta 'backend' rodar o comando para vincular o prisma ao banco de dados:
 ```npm prisma generate```
