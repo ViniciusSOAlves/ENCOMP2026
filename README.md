@@ -1,7 +1,7 @@
 # Passo a passo para execução do site
 
 ## Pré requisitos para funcionar: ter o NodeJS instalado em seu computador e um servidor MySQL(recomenda-se o WampServer, o mesmo que foi utilizado para o desenvolvimento).
-### O banco de dados está na pasta em geral com o nome de encomp2026.sql para importação!!!!!!!!!!!!!!!!!!!!!!!!!
+
 Após a clonagem da pasta rodar o comando abaixo, tanto na pasta 'backend' e na pasta principal do projeto:
   ```npm i``` 
 
