@@ -39,6 +39,7 @@ const Palestras = () => {
 
   return (
     <div className="container py-5">
+
       <div className="row">
         <div className="col-12 text-center mb-5">
           <h1 className="fw-bold text-light m-0">
@@ -56,6 +57,7 @@ const Palestras = () => {
       <div className="row">
         <div className="col-12 mb-5">
           <div className="d-flex flex-wrap justify-content-center gap-2 gap-md-3">
+
             {[
               "2026-10-26",
               "2026-10-27",
@@ -63,6 +65,7 @@ const Palestras = () => {
               "2026-10-29",
               "2026-10-30"
             ].map((data, index) => {
+
               const dias = [
                 "Segunda-feira",
                 "Terça-feira",
@@ -93,14 +96,22 @@ const Palestras = () => {
                 </div>
               );
             })}
+
           </div>
         </div>
       </div>
 
       <div className="row g-4 justify-content-center">
+
         {Array.isArray(palestra) && palestra.length > 0 ? (
+
           palestra.map((i) => (
-            <div className="col-12 col-sm-6 col-lg-3" key={i.id}>
+
+            <div
+              className="col-12 col-sm-6 col-lg-3"
+              key={i.id}
+            >
+
               <div
                 className="card h-100 shadow-sm border-0"
                 style={{
@@ -109,80 +120,116 @@ const Palestras = () => {
                   overflow: "hidden"
                 }}
               >
-                <div
-                  className="card-body p-3 text-light d-flex flex-column align-items-center text-center"
-                  id={i.id}
-                >
-                  <div className="mb-3">
-                    <img
-                      src={"/FotosPalestras/" + i.foto}
-                      alt={i.palestrante}
+
+                <div className="position-relative">
+
+                  <img
+                    src={"/FotosPalestras/" + i.foto}
+                    alt={i.palestrante}
+                    style={{
+                      width: "100%",
+                      height: "230px",
+                      display: "block",
+                      objectFit: "cover",
+                      objectPosition: "center",
+                      borderBottom: "3px solid var(--cor8)"
+                    }}
+                  />
+
+                  {i.modalidade && (
+                    <span
+                      className="badge position-absolute top-0 start-0 m-2 px-2 py-1"
                       style={{
-                        width: "110px",
-                        height: "110px",
-                        display: "block",
-                        objectFit: "cover",
-                        borderRadius: "10px",
-                        border: "2px solid var(--cor8)",
-                        backgroundColor: "#1e1e1e",
-                        boxShadow: "0 4px 8px rgba(0, 0, 0, 0.4)"
+                        backgroundColor:
+                          i.modalidade?.toLowerCase() === "online"
+                            ? "#0dcaf0"
+                            : "#ffc107",
+                        color: "#000000",
+                        fontWeight: "bold",
+                        fontSize: "0.75rem",
+                        boxShadow: "0 2px 5px rgba(0,0,0,0.5)"
                       }}
-                    />
-                  </div>
+                    >
+                      {i.modalidade?.toUpperCase()}
+                    </span>
+                  )}
+
+                </div>
+
+                <div
+                  className="card-body p-2 text-light d-flex flex-column align-items-center text-center"
+                  id={i.id}
+                  style={{
+                    minWidth: 0
+                  }}
+                >
 
                   <h6
-                    className="fw-bold mb-1"
+                    className="fw-bold mb-1 w-100"
                     style={{
                       color: "var(--cor6)",
-                      fontSize: "1rem"
+                      fontSize: "1rem",
+                      overflowWrap: "anywhere"
                     }}
                   >
                     {i.palestrante}
                   </h6>
 
                   <p
-                    className="small mb-2"
+                    className="small mb-2 w-100"
                     style={{
                       color: "#999999",
-                      fontSize: "0.8rem"
+                      fontSize: "0.8rem",
+                      overflowWrap: "anywhere"
                     }}
                   >
                     {i.status}
                   </p>
 
                   <span
-                    className="badge rounded-pill mb-3 px-3 py-1 w-100 text-truncate"
+                    className="badge rounded-pill mb-2 px-3 py-1 w-100"
                     style={{
                       backgroundColor: "var(--cor8)",
                       color: "#ffffff",
                       fontWeight: "500",
-                      fontSize: "0.75rem"
+                      fontSize: "0.75rem",
+                      whiteSpace: "normal",
+                      overflowWrap: "anywhere"
                     }}
                   >
                     {i.tema}
                   </span>
 
                   <p
-                    className="fw-bold mb-1 text-light"
-                    style={{ fontSize: "0.9rem" }}
+                    className="fw-bold mb-1 text-light w-100"
+                    style={{
+                      fontSize: "0.9rem",
+                      overflowWrap: "anywhere",
+                      wordBreak: "break-word"
+                    }}
                   >
                     {i.nome}
                   </p>
 
                   <p
-                    className="small mb-3 flex-grow-1"
+                    className="small mb-2 w-100"
                     style={{
                       color: "#cccccc",
                       fontSize: "0.8rem",
-                      lineHeight: "1.3"
+                      lineHeight: "1.3",
+                      maxWidth: "100%",
+                      overflowWrap: "anywhere",
+                      wordBreak: "break-word",
+                      whiteSpace: "normal"
                     }}
                   >
                     {i.descri}
                   </p>
 
-                  <hr className="w-100 border-secondary opacity-25 my-2" />
+                  <hr className="w-100 border-secondary opacity-25 my-1" />
 
-                  <div className="w-100 mt-auto">
+                  <div className="w-100">
+
                     <p
                       className="mb-1 fw-bold"
                       style={{
@@ -199,7 +246,9 @@ const Palestras = () => {
 
                     <p
                       className="mb-1 text-light"
-                      style={{ fontSize: "0.8rem" }}
+                      style={{
+                        fontSize: "0.8rem"
+                      }}
                     >
                       Início:{" "}
                       {i.horario
@@ -213,23 +262,36 @@ const Palestras = () => {
 
                     <p
                       className="mb-0 text-muted"
-                      style={{ fontSize: "0.75rem" }}
+                      style={{
+                        fontSize: "0.75rem",
+                        overflowWrap: "anywhere"
+                      }}
                     >
                       {i.modalidade} ({i.local})
                     </p>
+
                   </div>
+
                 </div>
+
               </div>
+
             </div>
+
           ))
+
         ) : (
+
           <div className="col-12 text-center">
             <p className="text-light">
               Nenhuma palestra encontrada.
             </p>
           </div>
+
         )}
+
       </div>
+
     </div>
   );
 };
